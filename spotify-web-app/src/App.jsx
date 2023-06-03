@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-title">SpotifyCollab</div>
+      <div className="App-title"><a href='.'>SpotifyCollab</a></div>
       <Login/>
     </div>
   );

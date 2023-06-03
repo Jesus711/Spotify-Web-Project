@@ -1,64 +1,108 @@
+import { useEffect, useState } from 'react';
 import '../App.css';
 
 
 function Login() {
 
-    const client_id = process.env.REACT_APP_CLIENT_ID;
-    const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+    const [code, setCode] = useState(() => {
+        const logged = window.location.search;
+        const urlParams = new URLSearchParams(logged)
+        let code = urlParams.get('code')
+        if(code === undefined || code === null){
+            window.sessionStorage.clear();
+            return ''
+        }
+        return code
+    })
+
+    const [token, setToken] = useState(() => {
+        const token_created = window.sessionStorage.getItem('token')
+        if(token_created && token_created !== undefined){
+            console.log("TOKEN STATE SET",token_created)
+            return token_created
+        }
+        return ""
+    });
+
+
+    const client_id = import.meta.env.VITE_CLIENT_ID;
+    const client_secret = import.meta.env.VITE_CLIENT_SECRET;
     let url;
-    let redirect_uri = "http://localhost:3000/"
+    let redirect_uri = "http://localhost:5173/"
     let scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
 
-
-    const AUTHORIZE = "https://accounts.spotify.com/authorize"
-    url = AUTHORIZE
+    const AUTHORIZE = "https://accounts.spotify.com/authorize";
+    url = AUTHORIZE;
     url += '?client_id=' + client_id
     url += "&response_type=code";
     url += "&redirect_uri=" + encodeURI(redirect_uri);
     url += "&show_dialog=true";
     url += "&scope=" + scope;
 
-    // async function handleLogin() {
+    function handleLogin() {
 
+        const TOKEN = "https://accounts.spotify.com/api/token"
+        console.log("EXECUTED >>>>")
 
-    //     let url = "https://accounts.spotify.com/authorize";
-    //     let scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
-    //     let redirect_uri = "http://localhost:3000/"
+        try {
+            let result = fetch(TOKEN, 
+                {
+                    method: 'POST',
+                    headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret)
+                    },
+                    body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}`
+                }).then(res => {
+                    return res.json()
+                }).then( data => {
+                    console.log(data)
+                    console.log(data['access_token'])
+                    if(data['access_token'] === undefined){
+                        return;
+                    }
+                    window.sessionStorage.setItem('token', data['access_token']);
+                    setToken(data['access_token']);
+                }).catch(err => {
+                    console.log(err.message)
+                })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
-    //     const AUTHORIZE = "https://accounts.spotify.com/authorize"
-    //     url += '?client_id=' + client_id
-    //     url += "&response_type=code";
-    //     url += "&redirect_uri=" + encodeURI(redirect_uri)
-    //     url += "&show_dialog=true"
-    //     url += "&scope=" + scope
+    useEffect(() => {
 
-    //     // let result = fetch(url);
+        if(code && !token) {
+            console.log("LOGGED IN> YA ")
+            handleLogin()
+        }
+        else if(token){
+            console.log("Token Successfully Created!")
+        }
+        else{
+            console.log("NEED TO LOGIN IN FIRST")
+        }
 
-    //     // url = "https://accounts.spotify.com/api/token"
+        // Clean Up Function
+        return (() => {
 
-    //     // let result = await fetch(url, 
-    //     //     {
-    //     //         method: 'POST',
-    //     //         headers: {
-    //     //                 'Content-Type': 'application/x-www-form-urlencoded',
-    //     //                 'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret)
-    //     //         },
-    //     //         body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}`
-    //     //     })
-    //     //console.log(result)
-    // }
+        })
+    }, [])
 
 
     return (
-        <div className="login-section">
-            <div>Spotify Login</div>
-            <button className="login-btn" onClick={() => {
-                console.log("CLICKED!")
 
-            }}>Login to Spotify</button>
-            <a href={url}>LOGIN IN</a>
-            <p>Must First Login Into Your Spotify Account to Use Web Service</p>
+        <div className="login-section">
+            {token ? <div>Redirecting to Service...</div> :
+                <div>       
+                    <div>Spotify Login</div>
+                    <a className="link" onClick={() => {window.sessionStorage.clear()}} href={url}><button className="login-btn">Login to Spotify</button></a>
+                    <p>Must First Login Into Your Spotify Account to Use Web Service</p> 
+                </div>
+            }
         </div>
+
     )
 }
 
