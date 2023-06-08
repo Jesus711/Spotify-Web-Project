@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -24,6 +26,7 @@ function Login() {
         return ""
     });
 
+    const navigate = useNavigate()
 
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
@@ -63,6 +66,7 @@ function Login() {
                     }
                     window.sessionStorage.setItem('token', data['access_token']);
                     setToken(data['access_token']);
+                    navigate('/home', {replace: true, state: {token: data['access_token']}})
                 }).catch(err => {
                     console.log(err.message)
                 })
@@ -90,17 +94,26 @@ function Login() {
         })
     }, [])
 
+    const handleNav = () => {
+        return (
+            <div>
+                <h1>Redirecting to Service...</h1> 
+                {navigate('/home', {replace: true, state: {token: token}})}
+            </div>
+        )
+    }
+
 
     return (
 
         <div className="login-section">
-            {token ? <div>Redirecting to Service...</div> :
+            {/* {token ? handleNav() : */}
                 <div>       
                     <div>Spotify Login</div>
                     <a className="link" onClick={() => {window.sessionStorage.clear()}} href={url}><button className="login-btn">Login to Spotify</button></a>
                     <p>Must First Login Into Your Spotify Account to Use Web Service</p> 
                 </div>
-            }
+            {/* // } */}
         </div>
 
     )
