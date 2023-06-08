@@ -6,7 +6,7 @@ import '../App.css';
 
 function Home() {
     const [userInfo, setUserInfo] = useState();
-    const [userPlaylists, setUserPlaylists] = useState();
+    const [userPlaylists, setUserPlaylists] = useState([]);
     const [playlistInfo, setPlaylistInfo] = useState();
 
     const location = useLocation();
@@ -26,7 +26,8 @@ function Home() {
             console.log("Token Expired Need to Relog in or Something else went wrong")
         })
 
-        console.log("FINISHED GET USER INFO")
+        console.log("FINISHED GET USER INFO");
+        console.log(result);
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserInfo(result);
     }
@@ -98,6 +99,8 @@ function Home() {
     const handleUI = () => {
 
         let image = userInfo.images[0].url
+        console.log("DISPLAY UInterface")
+
         return (
             <div className="user-info">
                 <img src={userInfo.images[0].url} alt="profile img"/>
@@ -130,23 +133,23 @@ function Home() {
 
     const displayPlaylists = () => {
 
-
+        console.log("DISPLAY PLAYLIST")
         return (
             <div className="playlists-section">
-                <h2>Playlists:</h2>
+                {userPlaylists.length !== 0 && <div className="section-name">Playlists:</div>}
+
                 <div className="playlists">
-                    {userPlaylists && userPlaylists.map((playlist, index) => {
+                    {userPlaylists && userPlaylists.map((playlist) => {
                         return (
                             <div key={playlist.id}  className="playlist">
                                 <div className="playlist-details">
                                     <img src={playlist.image[0].url}></img>
                                     <div>
                                         <h3>Title: {playlist.name}</h3>
-                                        <p>Description: {playlist.description}</p>
-                                        <p>Tracks: {playlist.total}</p>
+                                        {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
+                                        <p><strong>Tracks: {playlist.total}</strong></p>
                                     </div>
                                 </div>
-
                                 <div className="playlist-tracks">
                                     {playlist.info.map(track => {
                                         return (
@@ -155,7 +158,7 @@ function Home() {
                                                 <div><strong>{track.name}</strong></div>
                                                 {track.artists.length !== 0 && track.artists.map(artist => {
                                                     return (
-                                                        <div>{artist.name}</div>
+                                                        <div className="artist-name" key={artist.name}>{artist.name}</div>
                                                     )
                                                 })}
                                             </div>
@@ -170,6 +173,9 @@ function Home() {
     }
     
     const displayOptions = () => {
+
+        console.log("DISPLAY Options")
+
         return (
             <div className="options">
                 <button onClick={() => {navigate('/playlist')}} className="option-btn">
@@ -189,7 +195,8 @@ function Home() {
             <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
             {handleUI()}
             {displayOptions()}
-            {/* {displayPlaylists()} */}
+            {userPlaylists.length === 0 && <div className="fetch">Retrieving Playlists.....</div>}
+            {displayPlaylists()}
         </div>: 
         <div className="fetch">Retrieving User Information.....</div>}
         </>

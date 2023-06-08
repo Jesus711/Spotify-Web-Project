@@ -32,7 +32,7 @@ function Login() {
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
     let url;
     let redirect_uri = "http://localhost:5173/"
-    let scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
+    let scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
 
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
     url = AUTHORIZE;
@@ -106,14 +106,11 @@ function Login() {
 
     return (
 
-        <div className="login-section">
-            {/* {token ? handleNav() : */}
-                <div>       
-                    <div>Spotify Login</div>
-                    <a className="link" onClick={() => {window.sessionStorage.clear()}} href={url}><button className="login-btn">Login to Spotify</button></a>
-                    <p>Must First Login Into Your Spotify Account to Use Web Service</p> 
-                </div>
-            {/* // } */}
+        <div className="login-section">   
+            <div>Spotify Login</div>
+            <a className="link login-btn" onClick={() => {window.sessionStorage.clear()}} href={url}>Login to Spotify</a>
+            <p>Must First Login Into Your Spotify Account to Use Web Service</p> 
+            {/* <button className="login-btn">Login to Spotify</button> */}
         </div>
 
     )
