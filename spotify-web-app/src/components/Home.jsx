@@ -18,7 +18,7 @@ function Home() {
         let result = await fetch("https://api.spotify.com/v1/me", 
         {
             method: "GET", 
-            headers: { Authorization: `Bearer ${location.state.token}`}
+            headers: { 'Authorization': `Bearer ${location.state.token}`}
         }).then(res => {
             return res.json()
         }).catch(err => {
@@ -27,7 +27,6 @@ function Home() {
         })
 
         console.log("FINISHED GET USER INFO");
-        console.log(result);
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserInfo(result);
     }
@@ -46,7 +45,6 @@ function Home() {
         })
 
         console.log("FINISHED GET Playlists")
-        console.log(result)
         let playlists = [];
 
         for(let playlist of result.items){
@@ -73,7 +71,6 @@ function Home() {
             }
             playlists.push(playlistObj)
         }
-        console.log(playlists)
 
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserPlaylists(playlists);
@@ -99,7 +96,6 @@ function Home() {
     const handleUI = () => {
 
         let image = userInfo.images[0].url
-        console.log("DISPLAY UInterface")
 
         return (
             <div className="user-info">
@@ -127,7 +123,6 @@ function Home() {
             console.log("Token Expired Need to Relog in or Something else went wrong")
         })
 
-        console.log(result);
         return result;
     }
 
@@ -155,7 +150,7 @@ function Home() {
                                         return (
                                             <div className="track" key={track.id}>
                                                 <img src={track.images[0].url} alt="track-img"/>
-                                                <div><strong>{track.name}</strong></div>
+                                                <div className="track-name"><strong>{track.name}</strong></div>
                                                 {track.artists.length !== 0 && track.artists.map(artist => {
                                                     return (
                                                         <div className="artist-name" key={artist.name}>{artist.name}</div>
@@ -178,10 +173,10 @@ function Home() {
 
         return (
             <div className="options">
-                <button onClick={() => {navigate('/playlist')}} className="option-btn">
+                <button onClick={() => {navigate('/playlist', {replace: true, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
-                <button  onClick={() => {navigate('/collab')}} className="option-btn">
+                <button  onClick={() => {navigate('/collab', {replace: true, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
                     <div>Collab on PlayList</div>
                 </button>
             </div>
@@ -191,14 +186,18 @@ function Home() {
     return (
         <>
         {userInfo ? 
-        <div className="user-logged">
-            <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
-            {handleUI()}
-            {displayOptions()}
-            {userPlaylists.length === 0 && <div className="fetch">Retrieving Playlists.....</div>}
-            {displayPlaylists()}
-        </div>: 
-        <div className="fetch">Retrieving User Information.....</div>}
+            <div className="user-logged">
+                <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
+                {handleUI()}
+                {displayOptions()}
+                {userPlaylists.length === 0 && <div> <div className="fetch">Retrieving Playlist Information.....</div><div className="load"></div></div>}
+                {displayPlaylists()}
+            </div> : 
+            <div>
+                <div className="fetch">Retrieving User Information.....</div>
+                <div className="load"></div>
+            </div>
+        }
         </>
     )
 }

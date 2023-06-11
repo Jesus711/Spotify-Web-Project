@@ -66,7 +66,7 @@ function Login() {
                     }
                     window.sessionStorage.setItem('token', data['access_token']);
                     setToken(data['access_token']);
-                    navigate('/home', {replace: true, state: {token: data['access_token']}})
+                    navigate('/home', {replace: true, state: {token: data['access_token'], refresh: data['refresh_token']}})
                 }).catch(err => {
                     console.log(err.message)
                 })
