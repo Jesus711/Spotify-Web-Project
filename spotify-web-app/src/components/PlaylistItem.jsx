@@ -2,6 +2,7 @@ import playlist_image_holder from '../assets/Empty_Playlist.jpg';
 
 function PlaylistItem({ playlistCreated }) {
 
+    
     return (
         <div key={playlistCreated.id} className="playlist-created">
             {playlistCreated && <div className="section-name">Created Playlist:</div>}

@@ -1,3 +1,7 @@
+import '../css/Collab.css';
+
+
+
 function Collab() {
 
     return (

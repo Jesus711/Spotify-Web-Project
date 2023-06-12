@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import PlaylistItem from "./PlaylistItem";
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
+import '../css/Playlist.css';
 
 function Playlist() {
 
@@ -12,7 +13,7 @@ function Playlist() {
     const [collabPlaylist, setCollabPlaylist] = useState(false);
     const [baseImage, setBaseImage] = useState();
     const [image, setImage] = useState("");
-    const [playlistCreated, setPlaylistCreated] = useState("");
+    const [playlistCreated, setPlaylistCreated] = useState(null);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -50,7 +51,6 @@ function Playlist() {
 
         console.log(result)
         updatePlaylistImage(result.id);
-
         setPlaylistCreated(result);
     }
 
@@ -70,6 +70,7 @@ function Playlist() {
         })
 
         console.log(final);
+        setBaseImage(final.status == 202 || final.status == 200);
 
         return null;
     }
@@ -120,6 +121,19 @@ function Playlist() {
         setImage(image);
     }
 
+
+    useEffect(() => {
+        if(playlistCreated !== null && baseImage){
+            navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token}})
+        }
+
+    }, [baseImage])
+
+
+
+
+
+
     return (
         <div>
             <h2>Creating A Playlist</h2>
@@ -166,8 +180,9 @@ function Playlist() {
             {/* </div> */}
 
             </form>
-            {playlistCreated && handlePlaylistCreate()}
-            {playlistCreated && <PlaylistItem playlistCreated={playlistCreated}/>}
+            {playlistCreated && <div className="load"></div>}
+            {/* {playlistCreated && <PlaylistItem playlistCreated={playlistCreated}/>} */}
+
 
         </div>
        

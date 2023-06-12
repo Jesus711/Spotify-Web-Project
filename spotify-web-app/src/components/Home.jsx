@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Playlist from "./Playlist";
-import '../App.css';
+import '../css/Home.css';
 
 
 function Home() {
@@ -170,10 +170,10 @@ function Home() {
 
         return (
             <div className="options">
-                <button onClick={() => {navigate('/playlist', {replace: true, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
+                <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
-                <button  onClick={() => {navigate('/collab', {replace: true, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
+                <button  onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
                     <div>Collab on PlayList</div>
                 </button>
             </div>
