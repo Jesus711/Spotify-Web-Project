@@ -384,12 +384,34 @@
     gap: 0.5vh;
   }
 
+  .image-radio-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw;
+  }
 
   .playlist-creation {
+    padding: 4px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-items: center;
+    gap: 8px;
+    border: 2px solid black;
+    border-radius: 4px;
+    color: black;
+
+    /* background-image: linear-gradient(to right, hsl(144, 20%, 20%), hsl(144, 50%, 20%)); */
+  }
+
+  .playlist-setting {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    height: 250px;
   }
 
 
@@ -417,6 +439,7 @@
     font-size: 1.25rem;
     font-weight: bold;
     text-align: center;
+    cursor: pointer;
   }
 
 
@@ -439,6 +462,7 @@
 
   .playlist-desc > textarea::placeholder {
     color: white;
+    font-size: 1.25rem;
   }
 
   .playlist-desc > textarea {
@@ -457,7 +481,136 @@
     border-radius: 8px;
   }
 
+
+  .playlist-creation > div {
+    border: #000 solid 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  .playlist-creation > div > input {
+    cursor: pointer;
+  }
   
+
+  input[type="radio"] {
+    appearance: none;
+    background-color: #FFF;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    border: hsl(144, 90%, 0%) 2px solid;
+    border-radius: 50%;
+  }
+
+  input[type="radio"]:active {
+    appearance: none;
+    background-color: #FFF;
+    border: hsl(144, 50%, 20%) 2px solid;
+    border-radius: 50%;
+  }
+
+  input[type="radio"]:checked {
+    background-color: hsl(144, 80%, 20%);
+    border: hsl(144, 80%, 100%) 2px solid;
+    border-radius: 50%;
+    outline: hsl(144, 90%, 30%) 1px solid;
+  }
+
+  .option-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .playlist-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid black; */
+    position: relative;
+    border: black 2px solid;
+  }
+
+  .image-label {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  /* .image-option {
+    background: url("../src/assets/Empty_Playlist.jpg");
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    opacity: 100%;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+
+  /* .image-option::before {
+    content: "Upload Image";
+
+  } */
+
+  input[type="file"] {
+    /* display: none; */
+    cursor: pointer;
+  }
+
+
+  .image-option::-webkit-file-upload-button {
+
+    background: url("../src/assets/Empty_Playlist.jpg");
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    opacity: 80%;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .image-option::-webkit-file-upload-button:hover {
+    opacity: 100%;
+  }
+
+
+
+  .upload {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .upload:hover {
+    opacity: 90%;
+    cursor: pointer;
+  }
+  
+  .preview {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .playlist-view {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
 
 
 

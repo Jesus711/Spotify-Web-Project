@@ -26,7 +26,6 @@ function Home() {
             console.log("Token Expired Need to Relog in or Something else went wrong")
         })
 
-        console.log("FINISHED GET USER INFO");
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserInfo(result);
     }
@@ -44,7 +43,6 @@ function Home() {
             console.log("Token Expired Need to Relog in or Something else went wrong")
         })
 
-        console.log("FINISHED GET Playlists")
         let playlists = [];
 
         for(let playlist of result.items){
@@ -95,7 +93,6 @@ function Home() {
 
     const handleUI = () => {
 
-        let image = userInfo.images[0].url
 
         return (
             <div className="user-info">
@@ -138,7 +135,7 @@ function Home() {
                         return (
                             <div key={playlist.id}  className="playlist">
                                 <div className="playlist-details">
-                                    <img src={playlist.image[0].url}></img>
+                                    <img src={playlist.image.length !==0 ? playlist.image[0].url : null} alt="playlist-image"></img>
                                     <div>
                                         <h3>Title: {playlist.name}</h3>
                                         {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}

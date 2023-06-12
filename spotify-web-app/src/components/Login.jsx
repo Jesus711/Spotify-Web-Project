@@ -32,7 +32,7 @@ function Login() {
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
     let url;
     let redirect_uri = "http://localhost:5173/"
-    let scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
+    let scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public ugc-image-upload';
 
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
     url = AUTHORIZE;
@@ -45,7 +45,6 @@ function Login() {
     function handleLogin() {
 
         const TOKEN = "https://accounts.spotify.com/api/token"
-        console.log("EXECUTED >>>>")
 
         try {
             let result = fetch(TOKEN, 
@@ -78,7 +77,6 @@ function Login() {
     useEffect(() => {
 
         if(code && !token) {
-            console.log("LOGGED IN> YA ")
             handleLogin()
         }
         else if(token){
