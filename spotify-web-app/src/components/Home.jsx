@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Playlist from "./Playlist";
 import '../css/Home.css';
+import placeholder_img from '../assets/Empty_Playlist.jpg'
 
 
 function Home() {
@@ -70,6 +71,8 @@ function Home() {
             playlists.push(playlistObj)
         }
 
+        console.log(playlists)
+
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserPlaylists(playlists);
     }
@@ -123,6 +126,41 @@ function Home() {
         return result;
     }
 
+
+    const handleEditPlaylist = (id) => {
+        console.log(id)
+        let playlist_id = `${id}`.replace('\"', "").replace('\"', "")
+        console.log(playlist_id)
+        navigate('/playlist/search', {replace: false, state: {token: location.state.token, id: playlist_id} })
+    }
+
+    const handleDeletePlaylist = async (id) => {
+        let playlist_id = `${id}`.replace('\"', "").replace('\"', "")
+        let userChoice = window.confirm("Are You Sure You Want to Delete This Playlist?")
+        if(userChoice){
+            console.log("NOW DELETING PLAYLIST>..")
+            let result = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/followers`,
+            {
+                method: "DELETE", 
+                headers: { 'Authorization': `Bearer ${location.state.token}`}
+            }).then(res =>{
+                console.log(res)
+            })
+            console.log(userPlaylists)
+            let playlists = userPlaylists.filter(playlist => {
+                return playlist.id != id
+            })
+            console.log(playlists)
+            setUserPlaylists(playlists)
+        }
+        else{
+            console.log("CANCELED")
+        }
+
+
+
+    }
+
     const displayPlaylists = () => {
 
         console.log("DISPLAY PLAYLIST")
@@ -135,11 +173,13 @@ function Home() {
                         return (
                             <div key={playlist.id}  className="playlist">
                                 <div className="playlist-details">
-                                    <img src={playlist.image.length !==0 ? playlist.image[0].url : null} alt="playlist-image"></img>
+                                    <img src={playlist.image.length !==0 ? playlist.image[0].url : placeholder_img} alt="playlist-image"></img>
                                     <div>
                                         <h3>Title: {playlist.name}</h3>
                                         {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
                                         <p><strong>Tracks: {playlist.total}</strong></p>
+                                        <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
+                                        <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
                                     </div>
                                 </div>
                                 <div className="playlist-tracks">

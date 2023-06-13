@@ -157,6 +157,40 @@
     height: auto;
   }
 
+.edit-btn{
+  padding: 8px;
+  background-color: hsl(144, 80%, 40%);
+  color: #000;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.edit-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(144, 80%, 40%)
+}
+
+.delete-btn{
+  padding: 8px;
+  background-color: hsl(0, 90%, 70%);
+  color: #FFF;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.delete-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(0, 100%, 60%)
+}
+
 .playlist-tracks {
     width: 90%;
     display: flex;
@@ -181,5 +215,4 @@
 .artist-name {
     font-weight: 400;
     text-decoration: underline;
-
 }
