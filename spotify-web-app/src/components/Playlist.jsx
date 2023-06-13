@@ -9,8 +9,8 @@ function Playlist() {
 
     const [newPlaylistName, setnewPlaylistName] = useState("");
     const [playlistDescription, setPlaylistDescription] = useState("");
-    const [publicPlaylist, setPublicPlaylist] = useState(true);
-    const [collabPlaylist, setCollabPlaylist] = useState(false);
+    const [publicPlaylist, setPublicPlaylist] = useState(false);
+    const [collabPlaylist, setCollabPlaylist] = useState(true);
     const [baseImage, setBaseImage] = useState();
     const [image, setImage] = useState("");
     const [playlistCreated, setPlaylistCreated] = useState(null);
@@ -30,7 +30,7 @@ function Playlist() {
         let token = location.state.token;
         let user_id = location.state.id;
         let name = newPlaylistName;
-        let desc = playlistDescription
+        let desc = playlistDescription.length === 0 ? "Created By SpotifyCollab Web APP" : playlistDescription;
         let collab = collabPlaylist
         let userChoice = publicPlaylist; // Public set to false
         let setPublic = collab ? false : userChoice ? true : false; // If collab is set to true then set public to false, else set to true
@@ -51,12 +51,16 @@ function Playlist() {
 
         console.log(result)
         updatePlaylistImage(result.id);
+
+
+
         setPlaylistCreated(result);
     }
 
     const updatePlaylistImage = async (playlist) => {
         if(baseImage === undefined || baseImage === null){
-            return null;
+            setBaseImage("No image")
+            return false;
         }
 
         let final = await fetch(`https://api.spotify.com/v1/users/${location.state.id}/playlists/${playlist}/images`, 
@@ -72,7 +76,7 @@ function Playlist() {
         console.log(final);
         setBaseImage(final.status == 202 || final.status == 200);
 
-        return null;
+        return true;
     }
 
     const setChoices = (choice) => {
@@ -84,8 +88,9 @@ function Playlist() {
             setPublicPlaylist(false);
             setCollabPlaylist(false);
         }
-        else {
+        if (choice === 3) {
             setCollabPlaylist(true); //If Collaborative, playlist will be public;
+            setPublicPlaylist(false);
         }
 
     }
@@ -124,25 +129,28 @@ function Playlist() {
 
     useEffect(() => {
         if(playlistCreated !== null && baseImage){
-            navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token}})
+            setTimeout(() => { navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token}})}, 
+            2000)
         }
 
     }, [baseImage])
 
+    const handleSearchNav = () => {
+        const playlist_form = document.getElementsByClassName('playlist-form-container')
+        playlist_form[0].style.display = "none";
 
-
-
+        return(
+            <div className="load"></div>
+        )
+    }
 
 
     return (
         <div>
-            <h2>Creating A Playlist</h2>
-            {/* <div>Enter Playlist Name</div> */}
+            <h2>{!playlistCreated ? "Creating A Playlist" : "Creating Your Playlist......"}</h2>
             <form className="playlist-form-container" onSubmit={(e) => {createPlaylist(e)}}>
-            {/* <div className="playlist-form-container"> */}
                 <input id="name-input" value={newPlaylistName} onChange={(e) => setnewPlaylistName(e.target.value)} type="text" placeholder="Enter Playlist Name"></input>
                 <button id="create-btn"  type="submit">Create</button>
-                {/* <button id="create-btn"  onClick={(e) => {createPlaylist(e)}}>Create</button> */}
                 <div className="image-radio-options">
                     <div className="playlist-img">
                             <label className="image-label" htmlFor="image">Insert Image</label>
@@ -157,7 +165,7 @@ function Playlist() {
                         <div className="playlist-view">Viewing: </div>
                         <div className="playlist-creation">
                             <div>
-                                <input className="option" id="public-option" name="playlist-status" type="radio" value="Public" onChange={(e) => {setChoices(1)}} checked={publicPlaylist}/>
+                                <input className="option" id="public-option" name="playlist-status" type="radio" value="Public" onChange={(e) => {setChoices(1)}}/>
                                 <label className="option-label" htmlFor="public-option">Public</label>
                             </div>
                             <div>
@@ -165,7 +173,7 @@ function Playlist() {
                                 <label className="option-label" htmlFor="private-option">Private</label>
                             </div>
                             <div>
-                                <input className="option" id="collaborative" type="radio" name="playlist-status" value="Collaborative" onChange={(e) => {setChoices(3)}}/>
+                                <input className="option" id="collaborative" type="radio" name="playlist-status" value="Collaborative" checked={collabPlaylist} onChange={(e) => {setChoices(3)}}/>
                                 <label className="option-label" htmlFor="collaborative">Collaborative Playlist</label>
                             </div>
                         </div>
@@ -177,10 +185,8 @@ function Playlist() {
                     <textarea id="description" type="text" placeholder="Playlist Description" rows="5"
                         value={playlistDescription} onChange={(e) => {setPlaylistDescription(e.target.value)}}/>
                 </div>
-            {/* </div> */}
-
             </form>
-            {playlistCreated && <div className="load"></div>}
+            {playlistCreated && handleSearchNav()}
             {/* {playlistCreated && <PlaylistItem playlistCreated={playlistCreated}/>} */}
 
 
