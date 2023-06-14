@@ -53,7 +53,10 @@ function Home() {
             let images = playlist.images;
             let desc = playlist.description;
             let total = playlist.tracks.total;
-            let playlistObj = {"id" : id, "name" : name, "image": images, "description" : desc, "total" : total, "info" : []}
+            let publicPlay = playlist.public;
+            let collab = playlist.collaborative;
+            console.log(playlist)
+            let playlistObj = {"id" : id, "name" : name, "image": images, "description" : desc, "total" : total, "public" : publicPlay, "collaborative": collab, "info" : []}
             let tracks = await getPlaylistTracks(playlist.tracks.href)
             for(let track of tracks.items){
                 let tid = track.track.id
