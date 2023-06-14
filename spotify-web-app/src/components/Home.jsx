@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Playlist from "./Playlist";
 import '../css/Home.css';
 import placeholder_img from '../assets/Empty_Playlist.jpg'
+import PlaylistItem from "./PlaylistItem";
 
 
 function Home() {
@@ -171,33 +172,7 @@ function Home() {
                 <div className="playlists">
                     {userPlaylists && userPlaylists.map((playlist) => {
                         return (
-                            <div key={playlist.id}  className="playlist">
-                                <div className="playlist-details">
-                                    <img src={playlist.image.length !==0 ? playlist.image[0].url : placeholder_img} alt="playlist-image"></img>
-                                    <div>
-                                        <h3>Title: {playlist.name}</h3>
-                                        {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
-                                        <p><strong>Tracks: {playlist.total}</strong></p>
-                                        <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
-                                        <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
-                                    </div>
-                                </div>
-                                <div className="playlist-tracks">
-                                    {playlist.info.map(track => {
-                                        return (
-                                            <div className="track" key={track.id}>
-                                                <img src={track.images[0].url} alt="track-img"/>
-                                                <div className="track-name"><strong>{track.name}</strong></div>
-                                                {track.artists.length !== 0 && track.artists.map(artist => {
-                                                    return (
-                                                        <div className="artist-name" key={artist.name}>{artist.name}</div>
-                                                    )
-                                                })}
-                                            </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
+                            <PlaylistItem key={playlist.id} playlist={playlist} handleEditPlaylist={handleEditPlaylist} handleDeletePlaylist={handleDeletePlaylist}/>
                         )})}
                     </div>
             </div>   

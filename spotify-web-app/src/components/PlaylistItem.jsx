@@ -1,23 +1,35 @@
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
+import '../css/Playlist.css';
 
-function PlaylistItem({ playlistCreated }) {
+function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
 
     
     return (
-        <div key={playlistCreated.id} className="playlist-created">
-            {playlistCreated && <div className="section-name">Created Playlist:</div>}
-            <div className="playlist-item">
-                <div className="playlist">
-                    <div className="playlist-details">
-                        <img src={playlistCreated.image ? playlistCreated.image[0].url : playlist_image_holder}></img>
-                        <div>
-                            <h3>Title: {playlistCreated.name}</h3>
-                            {playlistCreated.description && <p><strong>Description: </strong>{playlistCreated.description}</p>}
-                            <p><strong>Tracks: {playlistCreated.tracks.total}</strong></p>
-                        </div>
-                    </div>
+        <div className="playlist">
+            <div className="playlist-details">
+                <img src={playlist.image.length !==0 ? playlist.image[0].url : placeholder_img} alt="playlist-image"></img>
+                <div>
+                    <h3>Title: {playlist.name}</h3>
+                    {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
+                    <p><strong>Tracks: {playlist.total}</strong></p>
+                    <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
+                    <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
                 </div>
-            </div>   
+            </div>
+            <div className="playlist-tracks">
+                {playlist.info.map(track => {
+                    return (
+                        <div className="track" key={track.id}>
+                            <img src={track.images[0].url} alt="track-img"/>
+                            <div className="track-name"><strong>{track.name}</strong></div>
+                            {track.artists.length !== 0 && track.artists.map(artist => {
+                                return (
+                                    <div className="artist-name" key={artist.name}>{artist.name}</div>
+                                )
+                            })}
+                        </div>
+                )})}
+            </div>
         </div>
     )
 }
