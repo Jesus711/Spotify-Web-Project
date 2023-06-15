@@ -1,5 +1,5 @@
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
-import '../css/Playlist.css';
+import '../css/Home.css';
 
 function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
 
@@ -8,12 +8,14 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
         <div className="playlist">
             <div className="playlist-details">
                 <img src={playlist.image.length !==0 ? playlist.image[0].url : placeholder_img} alt="playlist-image"></img>
-                <div>
+                <div className='playlist-data'>
                     <h3>Title: {playlist.name}</h3>
                     <div><strong>{playlist.collaborative ? "Collaborative": playlist.public ? "Public" : "Private"} Playlist</strong></div>                    {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
                     <p><strong>Tracks: {playlist.total}</strong></p>
-                    <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
-                    <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
+                </div>
+                <div className="edit-delete-btns">
+                        <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
+                        <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
                 </div>
             </div>
             <div className="playlist-tracks">

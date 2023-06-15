@@ -8,10 +8,10 @@
   }
 
 .welcome-msg {
+    border-top: 5px solid black;
     font-weight: 600;
-    font-size: 1.5rem;
-    border: #000 solid 3px;
-    width: 50%;
+    font-size: 2rem;
+    width: 100%;
     margin: auto;
     text-align: center;
   }
@@ -37,10 +37,14 @@
 .user-info > img {
     border-radius: 10%;
     border: black solid 3px;
+    object-fit: cover;
+    width: 200px;
+    height: 150px;
   }
 
 
 .account-details {
+    min-width: 150px;
     padding: 1vh 1vw;
     height: 100%;
     font-weight: 600;
@@ -59,7 +63,6 @@
     display: flex;
     flex-direction: row;
     margin: 1vh auto;
-    width: 60%;
     justify-content: center;
     align-content: center;
     gap: 1vw;
@@ -67,10 +70,10 @@
 
 .option-btn {
     background-color: #000;
-    width: 50%;
     height: 5vh;
-    padding: 1vh 2vw;
-    font-size: 1.4rem;
+    padding: 1vh 5vw;
+    font-size: 1.25rem;
+    min-width: 200px;
     font-weight: 600;
     color: #000;
     outline: none;
@@ -119,7 +122,7 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    width: 80%;
+    width: 90%;
     padding: 0;
     margin: 0;
     gap: 0;
@@ -132,40 +135,77 @@
     grid-template-columns: 1fr 3fr;
     justify-items: center;
     align-items: stretch;
-    border: #000 solid 5px;
+    border: #000 solid 4px;
+    border-bottom: 0px;
   }
 
 .playlist:last-child {
-    border-bottom: #000 solid 8px;;
+    border-bottom: #000 solid 4px;;
   }
  
 .playlist-details {
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
+    gap: 1vh;
     width: 90%;
     border-right: #000 5px solid;
   }
 
 .playlist-details > img {
-    margin: 1vh 0;
+    margin-top: 0.5vh;
     border-radius: 10%;
     object-fit: contain;
-    width: 200px;
+    min-width: 175px;
+    max-width: 90%;
     height: auto;
+    min-height: 125px;
+    max-height: 150px;
   }
+
+.playlist-data {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playlist-data > p, strong, h3{
+  margin: 0;
+  padding: 0;
+}
+
+.playlist-data > p {
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+}
+
+.playlist-data > h3 {
+  font-size: 1.5rem;
+}
+
+.playlist-data > div {
+  font-size: 1.3rem;
+}
+
+.edit-delete-btns {
+  display: flex;
+  margin-bottom: 0.25vh;
+  gap: 4px;
+}
 
 .edit-btn{
   padding: 8px;
   background-color: hsl(144, 80%, 40%);
   color: #000;
+  border: #FFF solid 2px;
   border-radius: 8px;
   font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  min-width: 150px;
 }
 
 .edit-btn:hover{
@@ -175,6 +215,7 @@
 }
 
 .delete-btn{
+  border: #FFF solid 2px;
   padding: 8px;
   background-color: hsl(0, 90%, 70%);
   color: #FFF;
@@ -183,6 +224,7 @@
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  min-width: 150px;
 }
 
 .delete-btn:hover{
@@ -195,7 +237,7 @@
     width: 90%;
     display: flex;
     padding: 0;
-    gap: 8px;
+    gap: 16px;
     overflow-x: scroll;
   }
 
@@ -204,15 +246,29 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 
 .track > img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
+
+.track-name {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-name:hover {
+  white-space: normal;
+  overflow: visible;
+}
 
 
 .artist-name {
     font-weight: 400;
     text-decoration: underline;
+
 }

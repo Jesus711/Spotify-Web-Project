@@ -29,6 +29,7 @@ function Home() {
         })
 
         ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
+        console.log(result);
         setUserInfo(result);
     }
 
@@ -55,7 +56,6 @@ function Home() {
             let total = playlist.tracks.total;
             let publicPlay = playlist.public;
             let collab = playlist.collaborative;
-            console.log(playlist)
             let playlistObj = {"id" : id, "name" : name, "image": images, "description" : desc, "total" : total, "public" : publicPlay, "collaborative": collab, "info" : []}
             let tracks = await getPlaylistTracks(playlist.tracks.href)
             for(let track of tracks.items){
@@ -108,7 +108,7 @@ function Home() {
                     <ul>
                         <li>Country: {userInfo.country}</li>
                         <li>Followers: {userInfo.followers.total}</li>
-                        <li>Premium User</li>
+                        <li>{userInfo.product === "free" ? "Free" : "Premium"} User</li>
                     </ul>
                 </div>
             </div>
