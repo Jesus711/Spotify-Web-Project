@@ -135,7 +135,7 @@ function Home() {
         console.log(id)
         let playlist_id = `${id}`.replace('\"', "").replace('\"', "")
         console.log(playlist_id)
-        navigate('/playlist/search', {replace: false, state: {token: location.state.token, id: playlist_id} })
+        navigate('/playlist/search', {replace: false, state: {token: location.state.token, id: playlist_id, country: userInfo.country} })
     }
 
     const handleDeletePlaylist = async (id) => {
@@ -188,7 +188,7 @@ function Home() {
 
         return (
             <div className="options">
-                <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
+                <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
                 <button  onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">

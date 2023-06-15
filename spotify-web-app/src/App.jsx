@@ -6,6 +6,7 @@ import Playlist from './components/Playlist';
 import Collab from './components/Collab';
 import spotify_img from '../src/assets/spotify-look-logo.png'
 import Search from './components/Search';
+import Artist from './components/Artist'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/playlist' element={<Playlist/>}></Route>
         <Route path='/collab' element={<Collab/>}></Route>
         <Route path='/playlist/search' element={<Search/>}></Route>
+        <Route path='/playlist/search/artist' element={<Artist/>}></Route>
       </Routes>
     </div>
   );

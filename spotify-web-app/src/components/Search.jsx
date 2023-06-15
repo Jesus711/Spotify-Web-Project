@@ -132,19 +132,16 @@ function Search() {
             console.log(songs);
             handleAddSong(songs);
         }
-
-
-
     }
 
 
     const handleArtistResults = (type) => {
 
         return (
-            <div className="search-list">
+            <div className="search-list-artist">
                 {searchResults[type].items.map(item => {
                     return (
-                        <div className="search-item" key={item.id}>
+                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
                             <div className="item-name" title={item.name}>{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
                         </div>
@@ -194,8 +191,8 @@ function Search() {
 
     return (
         <div className="search-container">
-            <button onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
             <div key={playlist.id} className="playlist-created">
+                <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
                 <div className="title"><strong>Created Playlist: </strong>{playlist.name}</div>
                 <div className="playlist-img-desc">
                     <img className="playlist-img" src={playlist ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
