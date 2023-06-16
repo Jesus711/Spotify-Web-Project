@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../css/Search.css';
 import PlaylistItem from "./PlaylistItem";
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
@@ -20,6 +20,7 @@ function Search() {
 
     const location = useLocation();
     const navigate = useNavigate();
+
 
     const playlistCreated = location.state ? location.state.playlist ? location.state.playlist.id : location.state.id : "NONE"
 
@@ -164,9 +165,17 @@ function Search() {
             <div className="search-list-artist">
                 {searchResults[type].items.map(item => {
                     return (
-                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                        <div onClick={() => 
+                        navigate('/playlist/search/artist', {replace: false, state: {
+                            playlist: playlist, 
+                            token: location.state.token, 
+                            artist: item.name, 
+                            id: item.id, 
+                            uri: item.uri, 
+                            country: location.state.country,
+                        }})} className="search-item" key={item.id}>
                             <div className="item-name" title={item.name}>{item.name}</div>
-                            <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
+                            <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>                        
                         </div>
                     )
                 })}

@@ -12,6 +12,22 @@ function Artist() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const handleAddSong = async (song) => {
+        console.log(song)
+        song = typeof song === "object" ? song : [song]
+        let result = await fetch(`https://api.spotify.com/v1/playlists/${location.state.playlist.id}/tracks`,//?${song}&position=0`, 
+        {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${location.state.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({uris: song, position: 0}),
+        })
+
+        console.log(result)
+    }
+
 
     async function getArtistInfo() {
 
@@ -146,11 +162,27 @@ function Artist() {
             <div className="artist-albums">
             {albums.items ? albums.items.map(item => {
                     return (
-                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                        <div className="search-item">
                             <div className="item-name" title={item.name}>{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
                             <div><strong>Release Date: </strong>{item.release_date}</div>
                             <div><strong>Tracks: </strong>{item.total_tracks}</div>
+                            <button className="add-btn" 
+                            onClick={() => 
+                            navigate('/playlist/search/artist/album', {replace: false, 
+                            state: {
+                                playlist: location.state.playlist,
+                                token: location.state.token, 
+                                artist: artist,
+                                album: item,
+                                name: item.name, 
+                                images: item.images,
+                                id: item.id, 
+                                uri: item.uri, 
+                                country: location.state.country,
+                            }})} 
+                                key={item.id}>
+                                View Album</button>
                         </div>
                     )
                 }) : "Related"}
@@ -159,7 +191,7 @@ function Artist() {
             <div className="related-artists">
                 {relatedArtists.artists ? relatedArtists.artists.map(item => {
                     return (
-                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: location.state.playlist, token: location.state.token, album: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
                             <div className="item-name" title={item.name}>{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
                         </div>
