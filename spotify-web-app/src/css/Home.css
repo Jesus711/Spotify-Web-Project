@@ -234,10 +234,10 @@
 }
 
 .playlist-tracks {
-    width: 90%;
+    width: 100%;
     display: flex;
     padding: 0;
-    gap: 16px;
+    gap: 12px;
     overflow-x: scroll;
   }
 

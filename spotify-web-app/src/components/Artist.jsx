@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import avatar from '../assets/avatar.webp';
+import '../css/Artist.css';
 
 function Artist() {
-    const [artist, setArtist] = useState("");
-    const [songs, setSongs] = useState("");
-    const [albums, setAlbums] = useState("");
+    const [artist, setArtist] = useState({});
+    const [songs, setSongs] = useState({});
+    const [albums, setAlbums] = useState({});
     const [relatedArtists, setRelatedArtists] = useState([])
 
     const location = useLocation();
@@ -23,10 +25,16 @@ function Artist() {
                 'Content-Type': 'application/json',
             },
         }).then(res => {
+            if(res.status >= 400)
+                throw new Error("Token Expired")
             return res.json()
+        }).catch(err => {
+            return null;
         })
 
-        console.log("GOT ArtistINFO", result)
+        if( result === null) return;
+
+        console.log("GOT Artist", result)
         setArtist(result);
     }
 
@@ -40,10 +48,15 @@ function Artist() {
                 'Content-Type': 'application/json',
             },
         }).then(res => {
+            if(res.status >= 400)
+                throw new Error("Token Expired")
             return res.json()
+        }).catch(err => {
+            return null;
         })
 
-        console.log("GOT ArtistTopTracks", result)
+        if( result === null) return;
+        console.log("GOT Top Tracks", result)
         setSongs(result);
     }
 
@@ -57,10 +70,15 @@ function Artist() {
                 'Content-Type': 'application/json',
             },
         }).then(res => {
+            if(res.status >= 400)
+                throw new Error("Token Expired")
             return res.json()
+        }).catch(err => {
+            return null;
         })
 
-        console.log("GOT ArtistAlbums", result)
+        if( result === null) return;
+        console.log("Albums", result)
         setAlbums(result);
     }
 
@@ -74,28 +92,80 @@ function Artist() {
                 'Content-Type': 'application/json',
             },
         }).then(res => {
+            if(res.status >= 400)
+                throw new Error("Token Expired")
             return res.json()
+        }).catch(err => {
+            return null;
         })
 
+        if( result === null) return;
+
         console.log("GOT RelatedArtists", result)
-        setAlbums(result);
+        setRelatedArtists(result);
     }
-
-
-
-
 
     useEffect(() => {
         getArtistInfo()
         getArtistTopTracks()
-        getArtistTopTracks()
+        getArtistAlbumsInfo()
         getRelatedArtists()
     }, [])
 
 
     return (
         <div>
-            <h2>Artist Name: {location.state.artist}</h2>
+            <div className="artist-details">
+                <img src={artist.images ? artist.images[0].url : avatar}/>
+                <div className="artist-stats">
+                    <div><strong>Artist:</strong> {artist.name}</div>
+                    <div><strong>Followers:</strong> {artist.followers ? artist.followers.total !== null ? artist.followers.total : "Unavailable" : ""}</div>
+                    <div><strong>Popularity:</strong> {artist.popularity}</div>
+                    <div><strong>Genres: </strong></div>
+                        <ul>
+                            {artist.genres ? artist.genres.map(genre => {return <li key={genre}>{genre.toUpperCase()}</li>}) : "Not Available"}
+                        </ul>
+
+                </div>
+            </div>
+            <h2>Top Tracks:</h2>
+            <div className="artist-top-tracks">
+                {songs.tracks ? songs.tracks.map(track => {
+                    return (
+                        <div className="search-item" key={track.id}>
+                            <div className="item-name">{track.name}</div>
+                            <img src={track.album.images.length !== 0 ? track.album.images[0].url : playlist_image_holder}></img>
+                            {track.preview_url !== null ? <audio controls src={track.preview_url ? track.preview_url : ""}>Play</audio> : "No Preview Available"}
+                            <button className="add-btn" onClick={() => {handleAddSong(track.uri)}}>Add Song</button>
+                        </div>
+                    )
+                }) : "None Found"}
+            </div>
+
+            <h2>Albums:</h2>
+            <div className="artist-albums">
+            {albums.items ? albums.items.map(item => {
+                    return (
+                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                            <div className="item-name" title={item.name}>{item.name}</div>
+                            <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
+                            <div><strong>Release Date: </strong>{item.release_date}</div>
+                            <div><strong>Tracks: </strong>{item.total_tracks}</div>
+                        </div>
+                    )
+                }) : "Related"}
+            </div>
+            <h2>Related Artists:</h2>
+            <div className="related-artists">
+                {relatedArtists.artists ? relatedArtists.artists.map(item => {
+                    return (
+                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: playlist, token: location.state.token, artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                            <div className="item-name" title={item.name}>{item.name}</div>
+                            <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
+                        </div>
+                    )
+                }) : "Related"}
+            </div>
         </div>
     )
 }

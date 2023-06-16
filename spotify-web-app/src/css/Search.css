@@ -194,6 +194,10 @@
     margin: 0 auto;
 }
 
+.search-item > .item-name:hover {
+    white-space: normal;
+}
+
 
 .search-item > img {
     width: 200px;
