@@ -4,6 +4,7 @@ import axios from 'axios';
 import PlaylistItem from "./PlaylistItem";
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
 import '../css/Playlist.css';
+import LoginExpired from "./LoginExpired";
 
 function Playlist() {
 
@@ -14,6 +15,8 @@ function Playlist() {
     const [baseImage, setBaseImage] = useState();
     const [image, setImage] = useState("");
     const [playlistCreated, setPlaylistCreated] = useState(null);
+
+    const [expired, setExpired] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -27,13 +30,23 @@ function Playlist() {
             return;
         }
 
-        let token = location.state.token;
-        let user_id = location.state.id;
-        let name = newPlaylistName;
-        let desc = playlistDescription.length === 0 ? "Created By SpotifyCollab Web APP" : playlistDescription;
-        let collab = collabPlaylist
-        let userChoice = publicPlaylist; // Public set to false
-        let setPublic = collab ? false : userChoice ? true : false; // If collab is set to true then set public to false, else set to true
+        let token, user_id, name, desc, collab, userChoice, setPublic;
+
+        try {
+            token = location.state.token;
+            user_id = location.state.id;
+            name = newPlaylistName;
+            desc = playlistDescription.length === 0 ? "Created By SpotifyCollab Web APP" : playlistDescription;
+            collab = collabPlaylist
+            userChoice = publicPlaylist; // Public set to false
+            setPublic = collab ? false : userChoice ? true : false; // If collab is set to true then set public to false, else set to true
+        } catch(err) {
+            console.log("Not Logged In")
+            setExpired(true)
+            return;
+        }
+
+
 
         let result = await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, 
         {
@@ -44,16 +57,20 @@ function Playlist() {
 
             },
             body: JSON.stringify({ name: name, public: setPublic, collaborative: collab, description: desc }),
-            // If collaborative playlist, public must be set to false
         }).then(res => {
+            if(res.status >= 400){
+                throw new Error("Token Expired")
+            }
             return res.json()
+        }).catch(err => {
+            console.log("Login Again")
+            setExpired(true)
+            return null
         })
 
-        console.log(result)
+        if(result === null) return;
+
         updatePlaylistImage(result.id);
-
-
-
         setPlaylistCreated(result);
     }
 
@@ -129,8 +146,8 @@ function Playlist() {
 
     useEffect(() => {
         if(playlistCreated !== null && baseImage){
-            setTimeout(() => { navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token}})}, 
-            2000)
+            setTimeout(() => { navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token, country: location.state.country}})}, 
+            500)
         }
 
     }, [baseImage])
@@ -147,7 +164,8 @@ function Playlist() {
 
     return (
         <div>
-            <h2>{!playlistCreated ? "Creating A Playlist" : "Creating Your Playlist......"}</h2>
+            <h2>{expired ? "" : !playlistCreated ? "Creating A Playlist" : "Creating Your Playlist......"}</h2>
+            {expired ? <LoginExpired/> : 
             <form className="playlist-form-container" onSubmit={(e) => {createPlaylist(e)}}>
                 <input id="name-input" value={newPlaylistName} onChange={(e) => setnewPlaylistName(e.target.value)} type="text" placeholder="Enter Playlist Name"></input>
                 <button id="create-btn"  type="submit">Create</button>
@@ -186,10 +204,8 @@ function Playlist() {
                         value={playlistDescription} onChange={(e) => {setPlaylistDescription(e.target.value)}}/>
                 </div>
             </form>
+            }
             {playlistCreated && handleSearchNav()}
-            {/* {playlistCreated && <PlaylistItem playlistCreated={playlistCreated}/>} */}
-
-
         </div>
        
     )

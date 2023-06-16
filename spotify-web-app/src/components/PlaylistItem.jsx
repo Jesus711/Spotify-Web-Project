@@ -7,10 +7,11 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
     return (
         <div className="playlist">
             <div className="playlist-details">
-                <img src={playlist.image.length !==0 ? playlist.image[0].url : placeholder_img} alt="playlist-image"></img>
+                <img src={playlist.image.length !==0 ? playlist.image[0].url : playlist_image_holder} alt="playlist-image"></img>
                 <div className='playlist-data'>
                     <h3>Title: {playlist.name}</h3>
-                    <div><strong>{playlist.collaborative ? "Collaborative": playlist.public ? "Public" : "Private"} Playlist</strong></div>                    {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
+                    <div><strong>{playlist.collaborative ? "Collaborative": playlist.public ? "Public" : "Private"} Playlist</strong></div>                    
+                    {playlist.description && <p><strong>Description: </strong>{playlist.description}</p>}
                     <p><strong>Tracks: {playlist.total}</strong></p>
                 </div>
                 <div className="edit-delete-btns">

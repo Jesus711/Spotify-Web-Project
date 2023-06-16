@@ -3,39 +3,51 @@ import '../css/Search.css';
 import PlaylistItem from "./PlaylistItem";
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
 import { useEffect, useState } from "react";
-import avatar from '../assets/avatar.webp'
+import avatar from '../assets/avatar.webp';
+import LoginExpired from './LoginExpired';
 
 
 function Search() {
-
-    const [playlist, setPlaylist] = useState("");
+    const [playlist, setPlaylist] = useState({});
     const [searched, setSearched] = useState("");
     const [searchResults, setSearchResults] = useState({});
     const [searchType, setSearchType] = useState("artist");
     const [prevSearch, setPrevSearch] = useState([]);
-
     const [songAdded, setSongAdded] = useState("");
+
+    const [expired, setExpired] = useState(false);
+
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    console.log(location.state)
-    const playlistCreated = location.state.playlist ? location.state.playlist.id : location.state.id
+    const playlistCreated = location.state ? location.state.playlist ? location.state.playlist.id : location.state.id : "NONE"
 
     const fetchPlaylist = async () => {
+
         let result = await fetch(`https://api.spotify.com/v1/playlists/${playlistCreated}`, 
         {
             method: "GET",
             headers: { 
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.token : ""}`,
                 'Content-Type': 'application/json',
-
             },
         }).then(res => {
+
+            if(res.status >= 400){
+                setExpired(true)
+                throw new Error("Expired Token!")
+            }
+
             return res.json()
+        }).catch(err => {
+            console.log("Re login")
+            return null;
         })
 
-        console.log("IMAGE", result)
+        if(result === null) {
+            return;
+        }
         setPlaylist(result)
     }
 
@@ -51,9 +63,16 @@ function Search() {
                 'Authorization': `Bearer ${location.state.token}`,
                 'Content-Type': 'application/json',
             },
-            // body: JSON.stringify({ q: searched, type: "album,track"}),
         }).then(res => {
+            if(res.status >= 400){
+                setExpired(true)
+                throw new Error("Expired Token!")
+            }
+
             return res.json()
+        }).catch(err => {
+            console.log("Re login")
+            return null;
         })
 
         console.log(result);
@@ -114,11 +133,15 @@ function Search() {
                 'Content-Type': 'application/json',
             },
         }).then(res => {
-            console.log(res)
-            if(res.status === 200 || res.status === 202){
-                return res.json()
+            if(res.status >= 400){
+                setExpired(true)
+                throw new Error("Expired Token!")
             }
-            return null
+
+            return res.json()
+        }).catch(err => {
+            console.log("Re login")
+            return null;
         })
 
         if(result === null){
@@ -160,7 +183,7 @@ function Search() {
                         <div className="search-item" key={item.id}>
                             <div className="item-name">{item.name}</div>
                             <img src={item.album.images.length !== 0 ? item.album.images[0].url : playlist_image_holder}></img>
-                            <audio controls src={item.preview_url ? item.preview_url : ""}>Play</audio>
+                            {item.preview_url !== null ? <audio controls src={item.preview_url ? item.preview_url : ""}>Play</audio> : "No Preview Available"}
                             <button className="add-btn" onClick={() => {handleAddSong(item.uri)}}>Add Song</button>
                         </div>
                     )
@@ -188,22 +211,23 @@ function Search() {
     }
 
 
-
     return (
+        
         <div className="search-container">
+            {expired ? <LoginExpired/> : 
             <div key={playlist.id} className="playlist-created">
                 <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
-                <div className="title"><strong>Created Playlist: </strong>{playlist.name}</div>
+                <div className="title"><strong>Created Playlist: </strong>{playlist.name ? playlist.name : ""}</div>
                 <div className="playlist-img-desc">
-                    <img className="playlist-img" src={playlist ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
+                    <img className="playlist-img" src={playlist.images ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
                     <div>
                         <strong>Description: </strong>
                         <div>{playlist.description}</div>
                     </div>         
                 </div>
-           
-            </div>
-            {playlist.collaborative && 
+            </div>}
+
+            {!expired && playlist.collaborative && 
             <div className="share-token">
                 <div>Share Token:</div>
                 <div id="token-value">123456</div> 
@@ -211,7 +235,7 @@ function Search() {
             </div>
             }
 
-            <form className="search" onSubmit={(e) => {handleSearch(e)}}>
+            {!expired &&<form className="search" onSubmit={(e) => {handleSearch(e)}}>
                 <h2>Search:</h2>
                 <input type="search" id="search-input" 
                 required
@@ -239,12 +263,14 @@ function Search() {
                 </div>
                 <button type="submit" id="search-btn">Search</button>
             </form>
+            }
 
-            { prevSearch.length !== 0 && <div className="results">
+            { !expired && prevSearch.length !== 0 && <div className="results">
                 <button>{"<"}</button>
                 {displaySearchResults()}
                 <button>{">"}</button>
-            </div>}
+                </div>
+            }
         </div>
 
     )

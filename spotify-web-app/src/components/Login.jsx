@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../css/Login.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -26,6 +26,7 @@ function Login() {
     });
 
     const navigate = useNavigate()
+    const location = useLocation();
 
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
@@ -64,7 +65,7 @@ function Login() {
                     }
                     window.sessionStorage.setItem('token', data['access_token']);
                     setToken(data['access_token']);
-                    navigate('/home', {replace: false, state: {token: data['access_token'], refresh: data['refresh_token']}})
+                    navigate('/home', {replace: false, state: {token: data['access_token'], refresh: data['refresh_token'], scope: data['scope'], token_type: "Bearer"}})
                 }).catch(err => {
                     console.log(err.message)
                 })

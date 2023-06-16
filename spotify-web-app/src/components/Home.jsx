@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import Playlist from "./Playlist";
 import '../css/Home.css';
 import placeholder_img from '../assets/Empty_Playlist.jpg'
+import avatar from '../assets/avatar.webp'
 import PlaylistItem from "./PlaylistItem";
+import LoginExpired from "./LoginExpired";
 
 
 function Home() {
-    const [userInfo, setUserInfo] = useState();
+    const [userInfo, setUserInfo] = useState("");
     const [userPlaylists, setUserPlaylists] = useState([]);
-    const [playlistInfo, setPlaylistInfo] = useState();
+    const [playlistInfo, setPlaylistInfo] = useState([]);
+    const [expired, setExpired] = useState(false);
 
     const location = useLocation();
 
@@ -17,20 +20,28 @@ function Home() {
 
     async function getUserProfileInfo() {
 
-        let result = await fetch("https://api.spotify.com/v1/me", 
-        {
-            method: "GET", 
-            headers: { 'Authorization': `Bearer ${location.state.token}`}
-        }).then(res => {
-            return res.json()
-        }).catch(err => {
-            console.log("ERROR")
-            console.log("Token Expired Need to Relog in or Something else went wrong")
-        })
+        try{
+            let result = await fetch("https://api.spotify.com/v1/me", 
+            {
+                method: "GET", 
+                headers: { 'Authorization': `Bearer ${location.state.token}`}
+            }).then(res => {
+                if(res.status >= 400){
+                    setExpired(true)
+                    throw new Error("Token Expired!");
+                }
+                
+                return res.json()
+            }).catch(err => {
+                return null;
+            })
+            
+            setUserInfo(result);
+        } catch(err) {
+            setExpired(true)
+        }
+        
 
-        ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
-        console.log(result);
-        setUserInfo(result);
     }
 
     async function getUserPlaylists() {
@@ -38,13 +49,20 @@ function Home() {
         let result = await fetch("https://api.spotify.com/v1/me/playlists", 
         {
             method: "GET", 
-            headers: { Authorization: `Bearer ${location.state.token}`}
+            headers: { Authorization: `Bearer ${location.state ? location.state.token : ""}`}
         }).then(res => {
+            if(res.status >= 400){
+                setExpired(true)
+                throw new Error("Something went wrong")
+            }
             return res.json()
         }).catch(err => {
-            console.log("ERROR")
-            console.log("Token Expired Need to Relog in or Something else went wrong")
+            return null;
         })
+
+        if(result === null){
+            return;
+        }
 
         let playlists = [];
 
@@ -76,22 +94,12 @@ function Home() {
         }
 
         console.log(playlists)
-
-        ///window.sessionStorage.setItem('user-info', JSON.stringify(result))
         setUserPlaylists(playlists);
     }
 
     useEffect(() => {
-        // if(window.sessionStorage.getItem('user-info')){
-        //     console.log("ALREADY LOGGED IN")
-        //     setUserInfo(JSON.parse(window.sessionStorage.getItem('user-info')))
-        // }
-        // else{
-        //     setTimeout(getUserProfileInfo, 1000)
-        // }
         setTimeout(getUserProfileInfo, 500)
-        setTimeout(getUserPlaylists, 800)
-
+        setTimeout(getUserPlaylists, 800)    
         return (
             // clearTimeout(getUserProfileInfo);
             console.log()
@@ -103,11 +111,11 @@ function Home() {
 
         return (
             <div className="user-info">
-                <img src={userInfo.images[0].url} alt="profile img"/>
+                <img src={userInfo.images ? userInfo.images[0].url : avatar} alt="profile img"/>
                 <div className="account-details">
                     <ul>
                         <li>Country: {userInfo.country}</li>
-                        <li>Followers: {userInfo.followers.total}</li>
+                        <li>Followers: {userInfo.followers ? userInfo.followers.total : "0"}</li>
                         <li>{userInfo.product === "free" ? "Free" : "Premium"} User</li>
                     </ul>
                 </div>
@@ -200,7 +208,7 @@ function Home() {
 
     return (
         <>
-        {userInfo ? 
+        {expired ? <LoginExpired/> : userInfo ? 
             <div className="user-logged">
                 <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
                 {handleUI()}
