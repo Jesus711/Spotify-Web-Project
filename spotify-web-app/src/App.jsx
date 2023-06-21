@@ -53,7 +53,7 @@ function App() {
         <Route path='/playlist' element={<Playlist/>}></Route>
         <Route path='/collab' element={<Collab/>}></Route>
         <Route path='/playlist/search' element={<Search/>}></Route>
-        <Route path='/playlist/search/artist' element={<Artist/>}></Route>
+        <Route path='/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
         <Route path='/playlist/search/artist/album' element={<Album/>}></Route>
       </Routes>
     </div>
