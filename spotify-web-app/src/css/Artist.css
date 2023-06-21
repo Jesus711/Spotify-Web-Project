@@ -34,3 +34,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto;
 }
+
+.related-artists .search-item {
+    cursor: pointer;
+}

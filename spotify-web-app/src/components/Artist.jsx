@@ -9,6 +9,8 @@ function Artist() {
     const [albums, setAlbums] = useState({});
     const [relatedArtists, setRelatedArtists] = useState([])
 
+    const [relatedInfo, setRelatedInfo] = useState({})
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -126,11 +128,23 @@ function Artist() {
         getArtistTopTracks()
         getArtistAlbumsInfo()
         getRelatedArtists()
-    }, [])
+        }, [relatedInfo.uri])
 
+    
+    function getSearchParams(){
+        // Retrieves Current pathname and gets the artist name and uri
+        let path = window.location.pathname.split("/")
+        let artist = path[path.length-2]
+        let uri = path[path.length-1]
+        artist = artist.split("%20").join(" ")
+        setRelatedInfo({
+            name: artist,
+            uri: uri
+        })
+    }
 
     return (
-        <div>
+        <div id="artist-section">
             <div className="artist-details">
                 <img src={artist.images ? artist.images[0].url : avatar}/>
                 <div className="artist-stats">
@@ -191,9 +205,15 @@ function Artist() {
             <div className="related-artists">
                 {relatedArtists.artists ? relatedArtists.artists.map(item => {
                     return (
-                        <div  onClick={() => navigate('/playlist/search/artist', {replace: false, state: {playlist: location.state.playlist, token: location.state.token, album: item.name, id: item.id, uri: item.uri, country: location.state.country}})} className="search-item" key={item.id}>
+                        <div onClick={() => {
+                            document.getElementsByClassName('App-title')[0]?.scrollIntoView({ behavior: 'smooth' });
+                            navigate(`/playlist/search/artist/${item.name}/${item.uri}`, {replace: true, state: {playlist: location.state.playlist, token: location.state.token, 
+                                artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})
+                            getSearchParams()
+                        }}
+                            className="search-item" key={item.id}>
                             <div className="item-name" title={item.name}>{item.name}</div>
-                            <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
+                            <img className="artist-photo" src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
                         </div>
                     )
                 }) : "Related"}

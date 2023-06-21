@@ -166,7 +166,7 @@ function Search() {
                 {searchResults[type].items.map(item => {
                     return (
                         <div onClick={() => 
-                        navigate('/playlist/search/artist', {replace: false, state: {
+                        navigate(`/playlist/search/artist/${item.name}/${item.uri}`, {replace: false, state: {
                             playlist: playlist, 
                             token: location.state.token, 
                             artist: item.name, 
