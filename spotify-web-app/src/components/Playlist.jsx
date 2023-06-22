@@ -173,6 +173,7 @@ function Playlist() {
                     <div className="playlist-img">
                             <label className="image-label" htmlFor="image">Insert Image</label>
                             <input onChange={(e) => {handleImageUpload(e)}} title="Upload Image" className="image-option" type="file" id="img" name="img" accept="image/*"/>
+                            <div><strong>Max Image Size: 256 KB</strong></div>
                     </div>
                     {image && <div className="preview">
                                 <div>Preview:</div>
