@@ -31,7 +31,8 @@ function Login() {
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
     let url;
-    let redirect_uri = "https://jesus711.github.io/Spotify-Web-Project/" // "http://localhost:5173/" 
+    let redirect_uri ="http://localhost:5173/"
+    redirect_uri =  "https://jesus711.github.io/Spotify-Web-Project/"
     let scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public ugc-image-upload';
 
     const AUTHORIZE = "https://accounts.spotify.com/authorize";
