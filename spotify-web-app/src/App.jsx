@@ -45,16 +45,16 @@ function App() {
             <div className='logo-border'></div>
             <img  className='logo-img'  src={spotify_img} alt="" />
         </div>
-        <a href='/'>SpotifyCollab</a>
+        <a href='https://jesus711.github.io/Spotify-Web-Project/'>SpotifyCollab</a>
       </div>
       <Routes>
-        <Route path='/' element={<Login/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/playlist' element={<Playlist/>}></Route>
-        <Route path='/collab' element={<Collab/>}></Route>
-        <Route path='/playlist/search' element={<Search/>}></Route>
-        <Route path='/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
-        <Route path='/playlist/search/artist/album' element={<Album/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/' element={<Login/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/home' element={<Home/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist' element={<Playlist/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/collab' element={<Collab/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search' element={<Search/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
+        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search/artist/album' element={<Album/>}></Route>
       </Routes>
     </div>
   );
