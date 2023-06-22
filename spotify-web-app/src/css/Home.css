@@ -94,6 +94,15 @@
     background-image: linear-gradient(to right, hsl(144, 20%, 30%), hsl(144, 50%, 20%));
    }
 
+.option-btn:disabled {
+  background: #3f3f3f;
+  color: #FFF;
+}
+
+.option-btn:disabled:hover {
+  transform: none;
+}
+
 /* Home.jsx Playlists CSS */
 
 

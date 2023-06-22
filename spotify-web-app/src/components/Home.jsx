@@ -199,7 +199,7 @@ function Home() {
                 <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
-                <button  onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
+                <button disabled onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
                     <div>Collab on PlayList</div>
                 </button>
             </div>
