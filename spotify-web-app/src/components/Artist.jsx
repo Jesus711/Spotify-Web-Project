@@ -153,7 +153,7 @@ function Artist() {
                     <div><strong>Popularity:</strong> {artist.popularity}</div>
                     <div><strong>Genres: </strong></div>
                         <ul>
-                            {artist.genres ? artist.genres.map(genre => {return <li key={genre}>{genre.toUpperCase()}</li>}) : "Not Available"}
+                            {artist.genres ? artist.genres.slice(0, 4).map(genre => {return <li key={genre}>{genre.toUpperCase()}</li>}) : "Not Available"}
                         </ul>
 
                 </div>

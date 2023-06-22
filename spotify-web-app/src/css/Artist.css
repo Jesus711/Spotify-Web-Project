@@ -1,3 +1,7 @@
+#artist-section {
+    margin: 8px;
+}
+
 .artist-details {
     display: flex;
     justify-content: center;
@@ -6,8 +10,8 @@
 }
 
 .artist-details > img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
     border-radius: 8px;
 }
@@ -35,6 +39,12 @@
     grid-template-rows: auto;
 }
 
-.related-artists .search-item {
+.related-artists {
+    cursor: pointer;
+    padding: 8px;
+}
+
+.search-item {
+    padding: 8px;
     cursor: pointer;
 }
