@@ -49,6 +49,7 @@ function Search() {
         if(result === null) {
             return;
         }
+        console.log(result)
         setPlaylist(result)
     }
 
@@ -85,7 +86,7 @@ function Search() {
 
     useEffect(() => {
         fetchPlaylist()
-    }, [])
+    }, [songAdded])
 
     const copyToken = () => {
         let token = document.getElementById('token-value')
@@ -121,8 +122,10 @@ function Search() {
             },
             body: JSON.stringify({uris: song, position: 0}),
         })
-
-        console.log(result)
+        
+        if (result.status === 201 || result.status === 200){
+            setSongAdded(song)
+        }
     }
 
     const handleAddAlbum = async (album) => {
@@ -211,12 +214,49 @@ function Search() {
                         <div className="search-item" key={item.id}>
                             <div className="item-name">{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : playlist_image_holder} alt={item.name + " Pic"}></img>
+                            <div><strong>By: </strong>{item.artists[0].name}</div>
+                            <div><strong>Release Date: </strong>{item.release_date}</div>
+                            <div><strong>Tracks: </strong>{item.total_tracks}</div>
                             <button className="add-btn" onClick={() => {handleAddAlbum(item.id)}}>Add Album</button>
                         </div>
                     )
                 })}
             </div>
         )
+    }
+
+    const handleTracksScroll = () => {
+        if (playlist.tracks.items.length <= 3){
+            let scroll = document.getElementsByClassName("list-tracks")
+            console.log(scroll)
+            scroll[0].style.overflow = 'auto'
+
+        }
+
+    }
+
+
+    const deleteSong = async (song) => {
+        const msg = document.getElementById("confirm-msg")
+        console.log(msg)
+        let result = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,//?${song}&position=0`, 
+        {
+            method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${location.state.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({tracks: [{uri: song}]}),
+        }).then(res => {
+            console.log(res)
+            if(res.status === 200 || res.status === 201){
+                setSongAdded(song)
+                msg.style.visibility = 'visible'
+                setTimeout(() => {msg.style.visibility = 'hidden'}, 400)
+            }
+        })
+
+        
     }
 
 
@@ -226,30 +266,43 @@ function Search() {
             {expired ? <LoginExpired/> : 
             <div key={playlist.id} className="playlist-created">
                 <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
-                <div className="title"><strong>Created Playlist: </strong>{playlist.name ? playlist.name : ""}</div>
+                <div className="title"><strong>Playlist: </strong>{playlist.name ? playlist.name : ""}</div>
                 <div className="playlist-img-desc">
                     <img className="playlist-img" src={playlist.images ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
                     <div>
                         <strong>Description: </strong>
                         <div>{playlist.description}</div>
-                    </div>         
+                    </div>  
+                    {playlist.tracks && playlist.tracks.items.length !== 0 ?
+                    <div className="list-tracks">
+                        {handleTracksScroll()}
+                        {playlist.tracks && playlist.tracks.items.map(track => {
+                            return(
+                            <div className="track" onClick={() => {deleteSong(track.track.uri)}}>
+                                <img src={track.track.album.images.length !== 0 ? track.track.album.images[0].url : playlist_image_holder}></img>
+                                <div>{track.track.name}</div>
+                            </div>
+                            )
+                        })}
+                    </div> : null}  
+                    <div id="confirm-msg"> Song Deleted</div>
                 </div>
             </div>}
 
-            {!expired && playlist.collaborative && 
+            {/* {!expired && playlist.collaborative && 
             <div className="share-token">
                 <div>Share Token:</div>
                 <div id="token-value">123456</div> 
                 <button className="copy-btn" onClick={copyToken}>Copy Token</button>
             </div>
-            }
+            } */}
 
             {!expired &&<form className="search" onSubmit={(e) => {handleSearch(e)}}>
                 <h2>Search:</h2>
                 <input type="search" id="search-input" 
                 required
                 value={searched}
-                placeholder="Enter Artist or Song Name"
+                placeholder="Enter Artist, Song Or Album Name"
                 onChange={(e) => setSearched(e.target.value)}/>
                 <div className="search-options">
                     <div>
