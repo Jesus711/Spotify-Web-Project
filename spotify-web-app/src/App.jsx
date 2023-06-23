@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -11,6 +11,8 @@ import Album from './components/Album';
 
 function App() {
 
+  let base = import.meta.env.DEV ? '' : '/react-vite-gh-pages'
+
 
   return (
     <div className="App">
@@ -21,15 +23,17 @@ function App() {
         </div>
         <a href='/'>SpotifyCollab</a>
       </div>
-      <Routes>
-        <Route path='/' element={<Login/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/playlist' element={<Playlist/>}></Route>
-        <Route path='/collab' element={<Collab/>}></Route>
-        <Route path='/playlist/search' element={<Search/>}></Route>
-        <Route path='/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
-        <Route path='/playlist/search/artist/album' element={<Album/>}></Route>
-      </Routes>
+      {/* <BrowserRouter basename={import.meta.env.DEV ? '/' : '/Spotify-Web-Project/'}> */}
+        <Routes>
+          <Route path={base + '/'} element={<Login/>}></Route>
+          <Route path={base + '/home'} element={<Home/>}></Route>
+          <Route path={base + '/playlist'} element={<Playlist/>}></Route>
+          <Route path={base + '/collab'} element={<Collab/>}></Route>
+          <Route path={base + '/playlist/search'} element={<Search/>}></Route>
+          <Route path={base + '/playlist/search/artist/:name/:uri'} element={<Artist/>}></Route>
+          <Route path={base + '/playlist/search/artist/album'} element={<Album/>}></Route>
+        </Routes>
+      {/* </BrowserRouter> */}
     </div>
   );
 }
