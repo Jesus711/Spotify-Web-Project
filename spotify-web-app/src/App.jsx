@@ -11,32 +11,6 @@ import Album from './components/Album';
 
 function App() {
 
-  async function getRefreshToken(token) {
-    const client_id = import.meta.env.VITE_CLIENT_ID;
-    const client_secret = import.meta.env.VITE_CLIENT_SECRET;
-    const TOKEN = "https://accounts.spotify.com/api/token"
-
-    let result = await fetch(TOKEN, 
-        {
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret)
-            },
-            body: `grant_type=refresh_token&refresh_token=${token}`
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-          return data
-        })
-    console.log(result)  
-
-    window.sessionStorage.setItem('refresh-token', result.access_token);
-
-    return result.access_token;
-  }
-
-
 
   return (
     <div className="App">
@@ -45,16 +19,16 @@ function App() {
             <div className='logo-border'></div>
             <img  className='logo-img'  src={spotify_img} alt="" />
         </div>
-        <a href='https://jesus711.github.io/Spotify-Web-Project/'>SpotifyCollab</a>
+        <a href='/'>SpotifyCollab</a>
       </div>
       <Routes>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/' element={<Login/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/home' element={<Home/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist' element={<Playlist/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/collab' element={<Collab/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search' element={<Search/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
-        <Route path='https://jesus711.github.io/Spotify-Web-Project/playlist/search/artist/album' element={<Album/>}></Route>
+        <Route path='/' element={<Login/>}></Route>
+        <Route path='/home' element={<Home/>}></Route>
+        <Route path='/playlist' element={<Playlist/>}></Route>
+        <Route path='/collab' element={<Collab/>}></Route>
+        <Route path='/playlist/search' element={<Search/>}></Route>
+        <Route path='/playlist/search/artist/:name/:uri' element={<Artist/>}></Route>
+        <Route path='/playlist/search/artist/album' element={<Album/>}></Route>
       </Routes>
     </div>
   );
