@@ -1,7 +1,7 @@
 .search-container {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 8px;
 }
 
 
@@ -43,6 +43,8 @@
   }
 
 .playlist-created {
+    margin: auto;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -79,37 +81,82 @@
 }
 
 .list-tracks{
-    width: 30%;
+    padding: 1vh 1vw;
+    width: 50%;
     display: flex;
+    flex-direction: row;
     overflow-x: scroll;
 }
 
-.list-tracks .track:hover{
-    cursor: pointer;
-    opacity: 80%;
+.Desc-tracks {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
 }
 
-.list-tracks .track:hover > img{
+.desc {
+    max-width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.track-title {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.track-title:hover {
+    white-space: wrap;
+}
+
+.track-img:hover {
     cursor: pointer;
     opacity: 50%;
 }
 
-.list-tracks > .track:hover > div{
-    cursor: pointer;
-    display: none;
-}
 
-.list-tracks .track:hover::after{
+.list-tracks .track {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.list-tracks .track:hover::after {
     content: "Delete Song?";
     opacity: 100;
     font-weight: bold;
-
 }
+
 
 .playlist-img-desc > img {
     border-radius: 10%;
     width: 200px;
-    height: 125px;
+    height: 200px;
     object-fit: cover;
     border: 2px solid black;
 }
@@ -141,7 +188,10 @@
 
 
 #token-value {
+    width: 30%;
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .search-options {

@@ -23,7 +23,7 @@
     align-items: start;
 }
 
-.artist-stats > ul, li {
+.artist-stats ul li {
     margin: 0;
     padding: 0;
     margin-left: 1vw;

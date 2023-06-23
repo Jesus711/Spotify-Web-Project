@@ -25,12 +25,13 @@ function Search() {
     const playlistCreated = location.state ? location.state.playlist ? location.state.playlist.id : location.state.id : "NONE"
 
     const fetchPlaylist = async () => {
+        console.log(location.state)
 
         let result = await fetch(`https://api.spotify.com/v1/playlists/${playlistCreated}`, 
         {
             method: "GET",
             headers: { 
-                'Authorization': `Bearer ${location.state ? location.state.token : ""}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -62,7 +63,7 @@ function Search() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -117,7 +118,7 @@ function Search() {
         {
             method: "POST",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({uris: song, position: 0}),
@@ -133,7 +134,7 @@ function Search() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -176,6 +177,7 @@ function Search() {
                             id: item.id, 
                             uri: item.uri, 
                             country: location.state.country,
+                            owner_token: location.state.owner_token,
                         }})} className="search-item" key={item.id}>
                             <div className="item-name" title={item.name}>{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>                        
@@ -226,15 +228,16 @@ function Search() {
     }
 
     const handleTracksScroll = () => {
-        if (playlist.tracks.items.length <= 3){
-            let scroll = document.getElementsByClassName("list-tracks")
-            console.log(scroll)
-            scroll[0].style.overflow = 'auto'
 
+        let scroll = document.getElementsByClassName("list-tracks")
+        if(scroll.length === 0) return;
+        if (playlist.tracks && playlist.tracks.items.length <= 3){
+            scroll[0].style.overflowX = 'hidden';
         }
-
+        else if (playlist.tracks.items.length > 3) {
+            scroll[0].style.overflowX = 'scroll';
+        }
     }
-
 
     const deleteSong = async (song) => {
         const msg = document.getElementById("confirm-msg")
@@ -243,7 +246,7 @@ function Search() {
         {
             method: "DELETE",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({tracks: [{uri: song}]}),
@@ -265,37 +268,43 @@ function Search() {
         <div className="search-container">
             {expired ? <LoginExpired/> : 
             <div key={playlist.id} className="playlist-created">
+                {/* {location.state.shared === undefined && <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>} */}
                 <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
                 <div className="title"><strong>Playlist: </strong>{playlist.name ? playlist.name : ""}</div>
                 <div className="playlist-img-desc">
                     <img className="playlist-img" src={playlist.images ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
-                    <div>
-                        <strong>Description: </strong>
-                        <div>{playlist.description}</div>
-                    </div>  
+                    {playlist.tracks && <div className="Desc-tracks">
+                        {playlist.description && 
+                            <div>
+                                <strong>Description: </strong>
+                                <div className="desc">{playlist.description}</div>
+                            </div>
+                        }
+                        <div><strong>Total Tracks:</strong> {playlist.tracks.total}</div>
+                    </div>}
                     {playlist.tracks && playlist.tracks.items.length !== 0 ?
                     <div className="list-tracks">
                         {handleTracksScroll()}
                         {playlist.tracks && playlist.tracks.items.map(track => {
                             return(
-                            <div className="track" onClick={() => {deleteSong(track.track.uri)}}>
-                                <img src={track.track.album.images.length !== 0 ? track.track.album.images[0].url : playlist_image_holder}></img>
-                                <div>{track.track.name}</div>
+                            <div className="track" >
+                                <img title="Click Image to Delete Song" onClick={() => {deleteSong(track.track.uri)}} className="track-img" src={track.track.album.images.length !== 0 ? track.track.album.images[0].url : playlist_image_holder}></img>
+                                <div className="track-title">{track.track.name}</div>
                             </div>
                             )
                         })}
                     </div> : null}  
-                    <div id="confirm-msg"> Song Deleted</div>
                 </div>
+                {/* <div id="confirm-msg"> Song Deleted</div> */}
             </div>}
 
-            {/* {!expired && playlist.collaborative && 
+            {!expired && playlist.collaborative &&  location.state.shared !== 1 && 
             <div className="share-token">
                 <div>Share Token:</div>
-                <div id="token-value">123456</div> 
+                <div id="token-value">{`${playlist.id}/${location.state.token}`}</div> 
                 <button className="copy-btn" onClick={copyToken}>Copy Token</button>
             </div>
-            } */}
+            }
 
             {!expired &&<form className="search" onSubmit={(e) => {handleSearch(e)}}>
                 <h2>Search:</h2>

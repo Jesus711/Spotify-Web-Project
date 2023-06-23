@@ -20,7 +20,7 @@ export default function Album() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -62,7 +62,7 @@ export default function Album() {
         {
             method: "POST",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({uris: song, position: 0}),

@@ -21,7 +21,7 @@ function Artist() {
         {
             method: "POST",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({uris: song, position: 0}),
@@ -39,7 +39,7 @@ function Artist() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -62,7 +62,7 @@ function Artist() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -84,7 +84,7 @@ function Artist() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -106,7 +106,7 @@ function Artist() {
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state ? location.state.owner_token ? location.state.owner_token : location.state.token : ""}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {
@@ -194,6 +194,7 @@ function Artist() {
                                 id: item.id, 
                                 uri: item.uri, 
                                 country: location.state.country,
+                                owner_token: location.state.owner_token,
                             }})} 
                                 key={item.id}>
                                 View Album</button>
@@ -208,7 +209,7 @@ function Artist() {
                         <div onClick={() => {
                             document.getElementsByClassName('App-title')[0]?.scrollIntoView({ behavior: 'smooth' });
                             navigate(`/playlist/search/artist/${item.name}/${item.uri}`, {replace: true, state: {playlist: location.state.playlist, token: location.state.token, 
-                                artist: item.name, id: item.id, uri: item.uri, country: location.state.country}})
+                                artist: item.name, id: item.id, uri: item.uri, country: location.state.country, owner_token: location.state.owner_token,}})
                             getSearchParams()
                         }}
                             className="search-item" key={item.id}>

@@ -52,7 +52,7 @@
     background-image: linear-gradient(to right, hsl(144, 20%, 20%), hsl(144, 50%, 20%));
   }
 
-.account-details > ul, li {
+.account-details ul{
     list-style-type: none;
     margin: 0.5vh 0;
     padding: 0;
@@ -240,6 +240,15 @@
   cursor: pointer;
   background-color: black;
   color: hsl(0, 100%, 60%)
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+  
 }
 
 .playlist-tracks {

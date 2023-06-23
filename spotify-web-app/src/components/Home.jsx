@@ -19,13 +19,14 @@ function Home() {
     const navigate = useNavigate();
 
     async function getUserProfileInfo() {
-
+        console.log("State:", location.state)
         try{
             let result = await fetch("https://api.spotify.com/v1/me", 
             {
                 method: "GET", 
                 headers: { 'Authorization': `Bearer ${location.state.token}`}
             }).then(res => {
+                console.log(res)
                 if(res.status >= 400){
                     setExpired(true)
                     throw new Error("Token Expired!");
@@ -51,6 +52,7 @@ function Home() {
             method: "GET", 
             headers: { Authorization: `Bearer ${location.state ? location.state.token : ""}`}
         }).then(res => {
+            console.log(res)
             if(res.status >= 400){
                 setExpired(true)
                 throw new Error("Something went wrong")
@@ -199,7 +201,7 @@ function Home() {
                 <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
-                <button disabled onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name} } )}} className="option-btn">
+                <button onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Collab on PlayList</div>
                 </button>
             </div>
