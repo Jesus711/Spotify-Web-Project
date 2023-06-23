@@ -7,7 +7,8 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
     return (
         <div className="playlist">
             <div className="playlist-details">
-                <img src={playlist.image.length !==0 ? playlist.image[0].url : playlist_image_holder} alt="playlist-image"></img>
+                {playlist.images && <img src={playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder} alt="playlist-image"></img>}
+                {playlist.image && <img src={playlist.image.length !== 0 ? playlist.image[0].url : playlist_image_holder} alt="playlist-image"></img>}
                 <div className='playlist-data'>
                     <h3>Title: {playlist.name}</h3>
                     <div><strong>{playlist.collaborative ? "Collaborative": playlist.public ? "Public" : "Private"} Playlist</strong></div>                    
@@ -19,7 +20,11 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
                         <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
                 </div>
             </div>
-            <div className="playlist-tracks">
+            {playlist.info.length === 0 ? 
+                <div className='empty'>
+                    <strong>No Tracks Have Been Added!</strong>
+                </div> : 
+                <div className="playlist-tracks">
                 {playlist.info.map(track => {
                     return (
                         <div className="track" key={track.id}>
@@ -32,7 +37,8 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
                             })}
                         </div>
                 )})}
-            </div>
+                </div>
+            }
         </div>
     )
 }
