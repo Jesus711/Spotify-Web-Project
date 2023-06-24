@@ -12,7 +12,7 @@ import Album from './components/Album';
 function App() {
 
   let base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
-
+  console.log(base);
 
   return (
     <div className="App">
