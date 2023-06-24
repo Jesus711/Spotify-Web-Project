@@ -12,6 +12,8 @@ function Collab() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
 
     console.log(location.state)
 
@@ -96,7 +98,7 @@ function Collab() {
 
 
 
-        navigate('/playlist/search', {replace: false, state: {token: location.state.token, id: playlist_id, country: location.state.country, "shared": 1, "owner_token": ownerToken} })
+        navigate(`${base}/playlist/search`, {replace: false, state: {token: location.state.token, id: playlist_id, country: location.state.country, "shared": 1, "owner_token": ownerToken} })
     }
 
 

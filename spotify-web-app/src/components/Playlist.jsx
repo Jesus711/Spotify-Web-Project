@@ -20,6 +20,8 @@ function Playlist() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
 
     async function createPlaylist(e){
 
@@ -146,7 +148,7 @@ function Playlist() {
 
     useEffect(() => {
         if(playlistCreated !== null && baseImage){
-            setTimeout(() => { navigate('/playlist/search', {replace: false, state: {playlist: playlistCreated, token: location.state.token, country: location.state.country}})}, 
+            setTimeout(() => { navigate(`${base}/playlist/search`, {replace: false, state: {playlist: playlistCreated, token: location.state.token, country: location.state.country}})}, 
             500)
         }
 

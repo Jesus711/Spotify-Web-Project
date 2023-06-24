@@ -18,6 +18,9 @@ function Home() {
 
     const navigate = useNavigate();
 
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
+
     async function getUserProfileInfo() {
         console.log("State:", location.state)
         try{
@@ -145,7 +148,7 @@ function Home() {
         console.log(id)
         let playlist_id = `${id}`.replace('\"', "").replace('\"', "")
         console.log(playlist_id)
-        navigate('/playlist/search', {replace: false, state: {token: location.state.token, id: playlist_id, country: userInfo.country} })
+        navigate(`${base}/playlist/search`, {replace: false, state: {token: location.state.token, id: playlist_id, country: userInfo.country} })
     }
 
     const handleDeletePlaylist = async (id) => {
@@ -198,10 +201,10 @@ function Home() {
 
         return (
             <div className="options">
-                <button onClick={() => {navigate('/playlist', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
+                <button onClick={() => {navigate(`${base}/playlist`, {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Create a PlayList</div>
                 </button>
-                <button onClick={() => {navigate('/collab', {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
+                <button onClick={() => {navigate(`${base}/collab`, {replace: false, state: {token: location.state.token, id: userInfo.id, userName: userInfo.display_name, country: userInfo.country} } )}} className="option-btn">
                     <div>Collab on PlayList</div>
                 </button>
             </div>
