@@ -28,6 +28,9 @@ function Login() {
     const navigate = useNavigate()
     const location = useLocation();
 
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
+
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const client_secret = import.meta.env.VITE_CLIENT_SECRET;
     let url;
@@ -65,7 +68,7 @@ function Login() {
                     }
                     window.sessionStorage.setItem('token', data['access_token']);
                     setToken(data['access_token']);
-                    navigate('/home', {replace: false, state: {token: data['access_token'], refresh: data['refresh_token'], scope: data['scope'], token_type: "Bearer"}})
+                    navigate(`${base}/home`, {replace: false, state: {token: data['access_token'], refresh: data['refresh_token'], scope: data['scope'], token_type: "Bearer"}})
                 }).catch(err => {
                     console.log(err.message)
                 })
@@ -96,7 +99,7 @@ function Login() {
         return (
             <div>
                 <h1>Redirecting to Service...</h1> 
-                {navigate('/home', {replace: true, state: {token: token}})}
+                {navigate(`${base}/home`, {replace: true, state: {token: token}})}
             </div>
         )
     }

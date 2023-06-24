@@ -20,6 +20,8 @@ function Search() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
 
 
     const playlistCreated = location.state ? location.state.playlist ? location.state.playlist.id : location.state.id : "NONE"
@@ -170,7 +172,7 @@ function Search() {
                 {searchResults[type].items.map(item => {
                     return (
                         <div onClick={() => 
-                        navigate(`/playlist/search/artist/${item.name}/${item.uri}`, {replace: false, state: {
+                        navigate(`${base}/playlist/search/artist/${item.name}/${item.uri}`, {replace: false, state: {
                             playlist: playlist, 
                             token: location.state.token, 
                             artist: item.name, 
@@ -269,7 +271,7 @@ function Search() {
             {expired ? <LoginExpired/> : 
             <div key={playlist.id} className="playlist-created">
                 {/* {location.state.shared === undefined && <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>} */}
-                <button className="home-nav-btn" onClick={() => {navigate('/home', {replace: false, state: {token: location.state.token}})}}>Home Page</button>
+                <button className="home-nav-btn" onClick={() => {navigate(`${base}/home`, {replace: false, state: {token: location.state.token}})}}>Home Page</button>
                 <div className="title"><strong>Playlist: </strong>{playlist.name ? playlist.name : ""}</div>
                 <div className="playlist-img-desc">
                     <img className="playlist-img" src={playlist.images ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>

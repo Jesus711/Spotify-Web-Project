@@ -13,6 +13,8 @@ function Artist() {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+
 
     const handleAddSong = async (song) => {
         console.log(song)
@@ -183,7 +185,7 @@ function Artist() {
                             <div><strong>Tracks: </strong>{item.total_tracks}</div>
                             <button className="add-btn" 
                             onClick={() => 
-                            navigate('/playlist/search/artist/album', {replace: false, 
+                            navigate(`${base}/playlist/search/artist/album`, {replace: false, 
                             state: {
                                 playlist: location.state.playlist,
                                 token: location.state.token, 
@@ -208,7 +210,7 @@ function Artist() {
                     return (
                         <div onClick={() => {
                             document.getElementsByClassName('App-title')[0]?.scrollIntoView({ behavior: 'smooth' });
-                            navigate(`/playlist/search/artist/${item.name}/${item.uri}`, {replace: true, state: {playlist: location.state.playlist, token: location.state.token, 
+                            navigate(`${base}/playlist/search/artist/${item.name}/${item.uri}`, {replace: true, state: {playlist: location.state.playlist, token: location.state.token, 
                                 artist: item.name, id: item.id, uri: item.uri, country: location.state.country, owner_token: location.state.owner_token,}})
                             getSearchParams()
                         }}
