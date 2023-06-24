@@ -1,0 +1,292 @@
+.fetch {
+    width: 70%;
+    height: 60%;
+    margin: auto;
+    text-align: center;
+    font-weight: 600;
+    font-size: 3.5rem;
+  }
+
+.welcome-msg {
+    border-top: 5px solid black;
+    font-weight: 600;
+    font-size: 2rem;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+
+  
+.user-logged {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+  }
+
+
+.user-info {
+    margin: 0.5vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+  }
+
+.user-info > img {
+    border-radius: 10%;
+    border: black solid 3px;
+    object-fit: cover;
+    width: 200px;
+    height: 150px;
+  }
+
+
+.account-details {
+    min-width: 150px;
+    padding: 1vh 1vw;
+    height: 100%;
+    font-weight: 600;
+    color: white;
+    background-image: linear-gradient(to right, hsl(144, 20%, 20%), hsl(144, 50%, 20%));
+  }
+
+.account-details ul{
+    list-style-type: none;
+    margin: 0.5vh 0;
+    padding: 0;
+  }
+
+
+.options {
+    display: flex;
+    flex-direction: row;
+    margin: 1vh auto;
+    justify-content: center;
+    align-content: center;
+    gap: 1vw;
+  }
+
+.option-btn {
+    background-color: #000;
+    height: 5vh;
+    padding: 1vh 5vw;
+    font-size: 1.25rem;
+    min-width: 200px;
+    font-weight: 600;
+    color: #000;
+    outline: none;
+    border: none;
+    margin: 2vh 1vw;
+    background-image: linear-gradient(to right, hsl(144, 90%, 50%), hsl(144, 90%, 60%));
+    background-color: none;
+    box-shadow: 1px 1px 0px 4px hsl(144, 90%, 0%);
+  }
+
+.option-btn:hover {
+    transform: scale(1.05);
+  }
+
+.option-btn:active {
+    box-shadow: 0px 0px 0px 4px hsl(144, 90%, 0%);
+    color: #FFF;
+    background-image: linear-gradient(to right, hsl(144, 20%, 30%), hsl(144, 50%, 20%));
+   }
+
+.option-btn:disabled {
+  background: #3f3f3f;
+  color: #FFF;
+}
+
+.option-btn:disabled:hover {
+  transform: none;
+}
+
+/* Home.jsx Playlists CSS */
+
+
+.playlists-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+ }
+
+.section-name {
+  font-weight: 700;
+  color: #000;
+  text-align: left;
+  font-size: 2rem;
+  width: 80%;
+}
+
+
+.playlists {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 90%;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+  }
+
+
+.playlist {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-items: center;
+    align-items: stretch;
+    border: #000 solid 4px;
+    border-bottom: 0px;
+  }
+
+.playlist:last-child {
+    border-bottom: #000 solid 4px;;
+  }
+ 
+.playlist-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
+    width: 90%;
+    border-right: #000 5px solid;
+  }
+
+.playlist-details > img {
+    margin-top: 0.5vh;
+    border-radius: 10%;
+    object-fit: contain;
+    min-width: 175px;
+    max-width: 90%;
+    height: auto;
+    min-height: 125px;
+    max-height: 150px;
+  }
+
+.playlist-data {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playlist-data > p, strong, h3{
+  margin: 0;
+  padding: 0;
+}
+
+.playlist-data > p {
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+}
+
+.playlist-data > h3 {
+  font-size: 1.5rem;
+}
+
+.playlist-data > div {
+  font-size: 1.3rem;
+}
+
+.edit-delete-btns {
+  display: flex;
+  margin-bottom: 0.25vh;
+  gap: 4px;
+}
+
+.edit-btn{
+  padding: 8px;
+  background-color: hsl(144, 80%, 40%);
+  color: #000;
+  border: #FFF solid 2px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.edit-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(144, 80%, 40%)
+}
+
+.delete-btn{
+  border: #FFF solid 2px;
+  padding: 8px;
+  background-color: hsl(0, 90%, 70%);
+  color: #FFF;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.delete-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(0, 100%, 60%)
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+  
+}
+
+.playlist-tracks {
+    width: 100%;
+    display: flex;
+    padding: 0;
+    gap: 12px;
+    overflow-x: scroll;
+  }
+
+.track {
+    margin: 1vh 0.5vw 0 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.track > img {
+    width: 150px;
+    height: 150px;
+  }
+
+.track-name {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-name:hover {
+  white-space: normal;
+  overflow: visible;
+}
+
+
+.artist-name {
+    font-weight: 400;
+    text-decoration: underline;
+
+}

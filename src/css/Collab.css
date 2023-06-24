@@ -1,0 +1,43 @@
+
+.collab-playlist-form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    gap: 1vh;
+  }
+
+.collab-playlist-form > div {
+    font-size: 2rem;
+}
+
+.collab-result{
+    display: grid;
+}
+
+.result-text {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.collab-playlist {
+    margin: 1vh 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    row-gap: 2vh;
+}
+
+.collab-playlist .collab-result .playlist {
+    justify-self: center;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-items: center;
+    align-items: stretch;
+    border: #000 solid 4px;
+}
+
+.collab-playlist .playlist .delete-btn {
+    display: none;
+}
