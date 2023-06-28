@@ -165,7 +165,7 @@ function Playlist() {
 
 
     return (
-        <div>
+        <div className="create-playlist-section">
             <h2>{expired ? "" : !playlistCreated ? "Creating A Playlist" : "Creating Your Playlist......"}</h2>
             {expired ? <LoginExpired/> : 
             <form className="playlist-form-container" onSubmit={(e) => {createPlaylist(e)}}>
@@ -173,12 +173,14 @@ function Playlist() {
                 <button id="create-btn"  type="submit">Create</button>
                 <div className="image-radio-options">
                     <div className="playlist-img">
-                            <label className="image-label" htmlFor="image">Insert Image</label>
-                            <input onChange={(e) => {handleImageUpload(e)}} title="Upload Image" className="image-option" type="file" id="img" name="img" accept="image/*"/>
+                            <label htmlFor="image">
+                                <div className="image-label">Insert Image</div>
+                                <input onChange={(e) => {handleImageUpload(e)}} title="Upload Image" className="image-option" type="file" id="img" name="img" accept="image/*"/>
+                            </label>
                             <div><strong>Max Image Size: 256 KB</strong></div>
                     </div>
                     {image && <div className="preview">
-                                <div>Preview:</div>
+                                <div>Image Preview:</div>
                                 <img className="upload" src={image ? image : playlist_image_holder}/>
                                 </div>}
 

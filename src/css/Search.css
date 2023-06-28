@@ -310,3 +310,13 @@
     background-color: black;
     color: hsl(144, 80%, 40%)
 }
+
+
+
+/* Small Phone 320px - 480px */
+@media (320px <= width <= 480px) {
+
+
+
+
+}

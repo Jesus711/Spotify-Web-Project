@@ -41,3 +41,12 @@
 .collab-playlist .playlist .delete-btn {
     display: none;
 }
+
+
+/* Small Phone 320px - 480px */
+@media (320px <= width <= 480px) {
+
+
+
+
+}

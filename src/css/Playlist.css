@@ -234,5 +234,167 @@ input[type="file"] {
 
 
 
+  /* Small Phone 320px - 480px */
+@media (320px <= width <= 480px) {
+
+  .create-playlist-section h2 {
+    padding: 0;
+    margin: 1vh 0 1vh;
+    font-size: 1.5rem;
+  }
+
+  .playlist-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    gap: 1vh;
+  }
+
+  .image-radio-options {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+  }
+
+  .playlist-creation {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    color: black;
+  }
+
+  .playlist-setting {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-start;
+    height: auto;
+  }
 
 
+  #name-input{
+    padding: 12px;
+    width: 84%;
+    background-color: black;
+    color: hsl(144, 80%, 40%);
+    border-radius: 8px;
+    font-size: 1.4rem;
+  }
+
+  #create-btn{
+    padding: 8px;
+    width: 50%;
+    background-color: hsl(144, 80%, 40%);
+    color: #000;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .playlist-desc {
+    margin: 1vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: 0.5vh;
+    width: 80%;
+  }
+
+  .playlist-desc > label {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    align-self: flex-start;
+    font-size: 1rem;
+  }
+
+  .playlist-desc > textarea::placeholder {
+    color: white;
+    font-size: 1rem;
+  }
+
+  #description {
+    font-size: 1rem;
+    padding: 8px;
+    width: 100%;
+    background-color: hsl(144, 50%, 20%);
+    color: #FFF;
+    border: 2px solid black;
+    border-radius: 8px;
+  }
+
+  .option-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .playlist-img {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-size: 1rem;
+  }
+
+  .image-label {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .image-option::-webkit-file-upload-button {
+    margin: auto;
+    background: url("../src/assets/upload.svg");
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 125px;
+    height: 125px;
+    color: #000;
+    font-weight: bold;
+    font-size: 1rem;
+    border: 2px solid black;
+  }
+
+  input[type='file'] {
+    color: transparent;
+    font-size: 0;
+  }
+
+  .upload {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .upload:hover {
+    opacity: 90%;
+    cursor: pointer;
+  }
+
+  .preview {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .playlist-view {
+    font-size: 1.25rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
+}

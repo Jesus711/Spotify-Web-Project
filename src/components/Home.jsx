@@ -103,8 +103,8 @@ function Home() {
     }
 
     useEffect(() => {
-        setTimeout(getUserProfileInfo, 500)
-        setTimeout(getUserPlaylists, 800)    
+        setTimeout(getUserProfileInfo, 1500)
+        setTimeout(getUserPlaylists, 1800)    
         return (
             // clearTimeout(getUserProfileInfo);
             console.log()

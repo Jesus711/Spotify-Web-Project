@@ -8,8 +8,7 @@
   }
 
 .welcome-msg {
-    border-top: 5px solid black;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 2rem;
     width: 100%;
     margin: auto;
@@ -288,5 +287,212 @@
 .artist-name {
     font-weight: 400;
     text-decoration: underline;
+}
+
+
+/* Small Phone 320px - 480px */
+@media (320px <= width <= 480px) {
+  .fetch {
+    font-size: 1.5rem;
+  }
+
+.welcome-msg {
+    font-size: 1.6rem;
+  }
+
+.user-info {
+    margin: 0.5vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+  }
+
+.user-info > img {
+    border-radius: 10%;
+    border: black solid 3px;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+  }
+
+
+.account-details {
+    font-size: 1.1rem;
+    min-width: 100px;
+    max-width: 150px;
+    padding: 1vh 2vw;
+  }
+
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+.option-btn {
+    margin: 1.5vh 1vw;
+  }
+
+
+/* Home.jsx Playlists CSS */
+.playlists-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+ }
+
+.section-name {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+
+.playlists {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 94%;
+  }
+
+
+.playlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: normal;
+    border: #000 solid 4px;
+    border-bottom: 0px;
+  }
+ 
+.playlist-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
+    width: 90%;
+    border-right: none;
+  }
+
+.playlist-details > img {
+    margin-top: 0.5vh;
+    border-radius: 10%;
+    object-fit: contain;
+    width: 100px;
+    height: 100px;
+  }
+
+.playlist-data {
+  gap: 4px;
+}
+
+.playlist-data > p {
+  font-size: 1.2rem;
+}
+
+.playlist-data > h3 {
+  font-size: 1.2rem;
+}
+
+.playlist-data > div {
+  font-size: 1.2rem;
+}
+
+.edit-delete-btns {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.25vh;
+  gap: 4px;
+}
+
+.edit-btn{
+  padding: 8px;
+  background-color: hsl(144, 80%, 40%);
+  color: #000;
+  border: #FFF solid 2px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  width: 150px;
+}
+
+.delete-btn{
+  border: #FFF solid 2px;
+  padding: 8px;
+  background-color: hsl(0, 90%, 70%);
+  color: #FFF;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  width: 150px;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.playlist-details::after{
+  content: "Tracks";
+  text-align: center;
+  text-decoration: underline;
+  display: block;
+  width: 100%;
+  font-weight: bold;
+
+}
+
+.playlist-tracks {
+    padding: 0 12vw 0 12vw;
+    display: flex;
+    flex-direction: row;
+    gap: 16vw;
+    overflow-x: scroll;
+  }
+
+  .playlist-tracks::-webkit-scrollbar-thumb {
+    width: 50px;
+  }
+
+  .playlist-tracks::-webkit-scrollbar {
+      height: 32px;
+  }
+
+.track {
+    width: 100%;
+    margin: 1vh 0 2vh 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+.track > img {
+    width: 150px;
+    height: 150px;
+  }
+
+.track-name {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 }

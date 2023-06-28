@@ -11,7 +11,7 @@ import Album from './components/Album';
 
 function App() {
 
-  const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
+  const base = import.meta.env.DEV ? '/' : '/Spotify-Web-Project'
   console.log(base);
 
   return (
@@ -19,7 +19,7 @@ function App() {
       <div className="App-title">
         <div className='container'>
             <div className='logo-border'></div>
-            <img  className='logo-img'  src={spotify_img} alt="" />
+            <img  className='logo-img' src={spotify_img} alt="" />
         </div>
         <a href={base}>SpotifyCollab</a>
       </div>
