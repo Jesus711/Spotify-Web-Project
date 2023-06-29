@@ -23,6 +23,7 @@ function Collab() {
 
         let collabPlaylist = collabToken.split("/")
         if(collabPlaylist.length <= 1){
+            setInputToken("None")
             return null;
         }
         console.log(collabPlaylist)
@@ -41,7 +42,7 @@ function Collab() {
             console.log(res)
             if (res.status >= 400){
                 setPlaylist({})
-                setInputToken(null)
+                setInputToken("None")
                 return null;
             }
             return res.json()
@@ -104,8 +105,8 @@ function Collab() {
 
     const handleCollabTokenSearch = () => {
 
-
-        if(playlist.id === undefined && inputToken === null){
+        console.log(inputToken)
+        if(playlist.id === undefined && inputToken === "None"){
             return (
                 <div>No Playlist Found!</div>
             )

@@ -580,6 +580,7 @@
         grid-template-rows: auto;
         justify-items: center;
         row-gap: 8px;
+        padding: 16px;
     }
 
     .search-list-album {
@@ -606,7 +607,7 @@
     }
     
     .search-item {
-        width: 250px;
+        width: 100%;
         border: 2px black solid;
         display: grid;
         grid-template-columns: 1fr auto;
