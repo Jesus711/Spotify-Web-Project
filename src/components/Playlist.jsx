@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import PlaylistItem from "./PlaylistItem";
 import playlist_image_holder from '../assets/Empty_Playlist.jpg';
+import upload from '../assets/upload.png';
 import '../css/Playlist.css';
 import LoginExpired from "./LoginExpired";
 
@@ -149,7 +150,7 @@ function Playlist() {
     useEffect(() => {
         if(playlistCreated !== null && baseImage){
             setTimeout(() => { navigate(`${base}/playlist/search`, {replace: false, state: {playlist: playlistCreated, token: location.state.token, country: location.state.country}})}, 
-            500)
+            400)
         }
 
     }, [baseImage])
@@ -169,14 +170,16 @@ function Playlist() {
             <h2>{expired ? "" : !playlistCreated ? "Creating A Playlist" : "Creating Your Playlist......"}</h2>
             {expired ? <LoginExpired/> : 
             <form className="playlist-form-container" onSubmit={(e) => {createPlaylist(e)}}>
-                <input id="name-input" value={newPlaylistName} onChange={(e) => setnewPlaylistName(e.target.value)} type="text" placeholder="Enter Playlist Name"></input>
+                <input id="name-input" required value={newPlaylistName} onChange={(e) => setnewPlaylistName(e.target.value)} type="text" placeholder="Enter Playlist Name"></input>
                 <button id="create-btn"  type="submit">Create</button>
                 <div className="image-radio-options">
                     <div className="playlist-img">
-                            <label htmlFor="image">
-                                <div className="image-label">Insert Image</div>
-                                <input onChange={(e) => {handleImageUpload(e)}} title="Upload Image" className="image-option" type="file" id="img" name="img" accept="image/*"/>
+                            <label htmlFor="img">
+                                <div className="image-label">Upload Image</div>
+                                <img className="upload-btn" src={upload} alt=""/>
                             </label>
+                            <input onChange={(e) => {handleImageUpload(e)}} title="Upload Image" className="image-option" type="file" id="img" name="img" accept="image/*"/>
+
                             <div><strong>Max Image Size: 256 KB</strong></div>
                     </div>
                     {image && <div className="preview">
