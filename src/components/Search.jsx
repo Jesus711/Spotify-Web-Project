@@ -197,9 +197,9 @@ function Search() {
                 {searchResults[type].items.map(item => {
                     return (
                         <div className="search-item" key={item.id}>
-                            <div className="item-name">{item.name}</div>
+                            <div className="track-item-name">{item.name}</div>
                             <img src={item.album.images.length !== 0 ? item.album.images[0].url : playlist_image_holder}></img>
-                            {item.preview_url !== null ? <audio controls src={item.preview_url ? item.preview_url : ""}>Play</audio> : "No Preview Available"}
+                            {item.preview_url !== null ? <audio controls src={item.preview_url ? item.preview_url : ""}>Play</audio> : <div id="preview-msg">No Preview Available</div>}
                             <button className="add-btn" onClick={() => {handleAddSong(item.uri)}}>Add Song</button>
                         </div>
                     )
@@ -212,11 +212,11 @@ function Search() {
     const handleAlbumResults = (type) => {
 
         return (
-            <div className="search-list">
+            <div className="search-list-album">
                 {searchResults[type].items.map(item => {
                     return (
-                        <div className="search-item" key={item.id}>
-                            <div className="item-name">{item.name}</div>
+                        <div className="album-search-item" key={item.id}>
+                            <div className="album-item-name">{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : playlist_image_holder} alt={item.name + " Pic"}></img>
                             <div><strong>By: </strong>{item.artists[0].name}</div>
                             <div><strong>Release Date: </strong>{item.release_date}</div>
@@ -229,7 +229,11 @@ function Search() {
         )
     }
 
-    const handleTracksScroll = () => {
+    const handleTracksScroll = () => { 
+
+        let device_width = window.innerWidth;
+        console.log(device_width)
+        if(device_width <= 480) return;
 
         let scroll = document.getElementsByClassName("list-tracks")
         if(scroll.length === 0) return;
@@ -277,7 +281,7 @@ function Search() {
                     <img className="playlist-img" src={playlist.images ? playlist.images.length !== 0 ? playlist.images[0].url : playlist_image_holder : playlist_image_holder}></img>
                     {playlist.tracks && <div className="Desc-tracks">
                         {playlist.description && 
-                            <div>
+                            <div id="desc">
                                 <strong>Description: </strong>
                                 <div className="desc">{playlist.description}</div>
                             </div>

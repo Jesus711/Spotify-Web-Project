@@ -46,7 +46,59 @@
 /* Small Phone 320px - 480px */
 @media (320px <= width <= 480px) {
 
+    .collab-playlist-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        gap: 1vh;
+      }
+    
+    .collab-playlist-form > div {
+        font-size: 2rem;
+    }
 
+    
+    .result-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .collab-playlist {
+        width: 100%;
+        margin: 1vh 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 2vh;
+    }
+
+    .collab-result{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .collab-playlist .collab-result .playlist .playlist-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .collab-playlist .collab-result .playlist {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+        border: #000 solid 4px;
+    }
+    
+    
+    .collab-playlist .playlist .delete-btn {
+        display: none;
+    }
 
 
 }

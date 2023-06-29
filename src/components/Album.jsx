@@ -77,7 +77,7 @@ export default function Album() {
         <div className="album-details">
             <div className="item-name" title={album.name}>{album.name}</div>
             <img src={location.state.images ? location.state.images[0].url : playlist_image_holder} alt={album.name + " Pic"}></img>
-            <div>By: {location.state.artist.name}</div>
+            <div><strong>By:</strong> {location.state.artist.name}</div>
             <div><strong>Release Date: </strong>{album.release_date}</div>
             <div><strong>Tracks: </strong>{album.total_tracks}</div>
         </div>
@@ -85,7 +85,7 @@ export default function Album() {
             {albumSongs.length !== 0 && albumSongs.map(item => {
                     return (
                         <div className="search-item" key={item.id}>
-                            <div className="item-name">{item.name}</div>
+                            <div className="track-item-name">{item.name}</div>
                             <img src={location.state.images ? location.state.images[0].url : playlist_image_holder}></img>
                             {item.preview_url !== null ? <audio controls src={item.preview_url ? item.preview_url : ""}>Play</audio> : "No Preview Available"}
                             <button className="add-btn" onClick={() => {handleAddSong(item.uri)}}>Add Song</button>

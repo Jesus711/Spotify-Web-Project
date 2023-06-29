@@ -189,33 +189,25 @@ input[type="file"] {
   }
 
 
-.image-option::-webkit-file-upload-button {
+.image-option {
+    display: none;
+  }
 
-    background: url("../src/assets/Empty_Playlist.jpg");
+
+
+  .upload {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+  .upload-btn {
+    border: 4px solid #4a738f;
+    background-color: #4596cb;
     width: 100%;
-    height: 250px;
+    height: 200px;
     object-fit: cover;
-    opacity: 80%;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
-    font-size: 2rem;
-  }
-
-.image-option::-webkit-file-upload-button:hover {
-    opacity: 100%;
-  }
-
-
-
-.upload {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-  }
-
-.upload:hover {
-    opacity: 90%;
     cursor: pointer;
   }
   
@@ -256,7 +248,7 @@ input[type="file"] {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    gap: 1vh;
+    gap: 0.25vh;
   }
 
   .playlist-creation {
@@ -342,30 +334,20 @@ input[type="file"] {
   .playlist-img {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 4px;
     font-size: 1rem;
   }
 
   .image-label {
-    margin: 0;
+    margin: 8px;
     padding: 0;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
   }
 
-  .image-option::-webkit-file-upload-button {
-    margin: auto;
-    background: url("../src/assets/upload.svg");
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 125px;
-    height: 125px;
-    color: #000;
-    font-weight: bold;
-    font-size: 1rem;
-    border: 2px solid black;
+
+  .image-option {
+    display: none;
   }
 
   input[type='file'] {
@@ -373,19 +355,25 @@ input[type="file"] {
     font-size: 0;
   }
 
-  .upload {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  .upload-btn {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
   }
 
-  .upload:hover {
+  .upload-btn:hover{
     opacity: 90%;
     cursor: pointer;
   }
 
+  .upload {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+  }
+
   .preview {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: bold;
   }
 

@@ -30,7 +30,54 @@
 /* Small Phone 320px - 480px */
 @media (320px <= width <= 480px) {
 
+    .album-display {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .album-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .album-details .item-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .album-details > div {
+        align-self: normal;
+        text-align: left;
+    }
+
+    .album-details > img {
+        width: 100px;
+        height: 100px;
+        margin: 8px;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 2px black solid;
+    }
+    
+    .album-tracks{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-x: scroll;
+        padding: 1vh 1vw;
+        column-gap: 8px;
+        row-gap: 4px;
+    }
+
+    .album-tracks::before {
+        content: "Tracks:";
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
 
 }

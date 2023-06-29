@@ -165,7 +165,7 @@ function Artist() {
                 {songs.tracks ? songs.tracks.map(track => {
                     return (
                         <div className="search-item" key={track.id}>
-                            <div className="item-name">{track.name}</div>
+                            <div className="track-item-name">{track.name}</div>
                             <img src={track.album.images.length !== 0 ? track.album.images[0].url : playlist_image_holder}></img>
                             {track.preview_url !== null ? <audio controls src={track.preview_url ? track.preview_url : ""}>Play</audio> : "No Preview Available"}
                             <button className="add-btn" onClick={() => {handleAddSong(track.uri)}}>Add Song</button>
@@ -178,8 +178,8 @@ function Artist() {
             <div className="artist-albums">
             {albums.items ? albums.items.map(item => {
                     return (
-                        <div className="search-item">
-                            <div className="item-name" title={item.name}>{item.name}</div>
+                        <div className="album-search-item">
+                            <div className="album-item-name" title={item.name}>{item.name}</div>
                             <img src={item.images.length !== 0 ? item.images[0].url : avatar} alt={item.name + " Pic"}></img>
                             <div><strong>Release Date: </strong>{item.release_date}</div>
                             <div><strong>Tracks: </strong>{item.total_tracks}</div>

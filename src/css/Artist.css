@@ -4,6 +4,7 @@
 
 .artist-details {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.25vw;
@@ -53,7 +54,86 @@
 /* Small Phone 320px - 480px */
 @media (320px <= width <= 480px) {
 
+    #artist-section {
+        margin: 8px;
+    }
+    
+    .artist-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: normal;
+        gap: 0.5vw;
+        font-size: 1rem;
+    }
+    
+    .artist-details > img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
 
+    #artist-section h2 {
+        margin: 0;
+        margin-top: 2vh;
+        padding: 0;
+        border: 2px black solid;
+        font-size: 1.5rem;
+        background-color: #1f6a85;
+        border-radius: 8px;
+        color: #FFF;
+    }
+    
+    .artist-stats {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: start;
+    }
+    
+    .artist-stats ul li {
+        margin: 0;
+        padding: 0;
+        margin-left: 0;
+        text-align: left;
+        list-style-type: disc;
+        font-size: 0.9rem;
+    }
 
+    .artist-stats ul {
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    .artist-top-tracks, .artist-albums, .related-artists {
+        padding: 1vh 1vw;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: scroll;
+    }
+    
+    .related-artists {
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    .artist-albums .album-search-item {
+        width: 275px;
+        border: 2px black solid;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .related-artists {
+        padding: 1vh 0vw;
+    }
+    
+    .search-item {
+        padding: 8px;
+        cursor: pointer;
+    }
+    
 
 }
