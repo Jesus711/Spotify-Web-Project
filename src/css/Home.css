@@ -301,6 +301,24 @@
   margin-bottom: 4px;
 }
 
+.playlist-tracks::-webkit-scrollbar-track {
+  background-color: #555;
+  background-color: #1f6a85;
+  border-radius: 16px;
+}
+
+.playlist-tracks::-webkit-scrollbar-thumb {
+  width: 50px;
+  background-color: hsl(32, 90%, 50%);
+  border-radius: 16px;
+
+}
+
+.playlist-tracks::-webkit-scrollbar {
+    height: 24px;
+}
+
+
 
 
 
@@ -381,6 +399,7 @@
     justify-content: center;
     align-items: normal;
     border: #000 solid 4px;
+    padding-bottom: 4px;
     border-bottom: 6px #FFF solid;
   }
 
@@ -521,6 +540,7 @@
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border-radius: 16px;
   }
   
   /* Handle */
@@ -722,10 +742,12 @@
 
     .playlist-tracks::-webkit-scrollbar-track {
       background-color: #1f6a85;
+      border-radius: 16px;
     }
   
     .playlist-tracks::-webkit-scrollbar-thumb {
       background-color: hsl(32, 90%, 50%);
+      border-radius: 16px;
     }
   
     .playlist-tracks::-webkit-scrollbar {

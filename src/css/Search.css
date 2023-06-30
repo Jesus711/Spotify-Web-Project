@@ -102,24 +102,22 @@
 }
 
 ::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 6px;
+    scrollbar-gutter: stable;
   }
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: hsl(144, 70%, 60%);
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #1f6a85;
+    border-radius: 16px;
   }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+
 
 .track-title {
     max-width: 150px;

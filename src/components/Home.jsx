@@ -29,7 +29,6 @@ function Home() {
                 method: "GET", 
                 headers: { 'Authorization': `Bearer ${location.state.token}`}
             }).then(res => {
-                console.log(res)
                 if(res.status >= 400){
                     setExpired(true)
                     throw new Error("Token Expired!");
@@ -98,17 +97,15 @@ function Home() {
                 trackObj["images"] = track.track.album.images;
                 playlistObj["info"].push(trackObj);
             }
-            console.log(playlist)
             playlists.push(playlistObj)
         }
 
-        console.log(playlists)
         setUserPlaylists(playlists);
     }
 
     useEffect(() => {
-        setTimeout(getUserProfileInfo, 400)
-        setTimeout(getUserPlaylists, 700)    
+        setTimeout(getUserProfileInfo, 200)
+        setTimeout(getUserPlaylists, 500)    
         return (
             // clearTimeout(getUserProfileInfo);
             console.log()
@@ -149,7 +146,6 @@ function Home() {
 
 
     const handleEditPlaylist = (id) => {
-        console.log(id)
         let playlist_id = `${id}`.replace('\"', "").replace('\"', "")
         console.log(playlist_id)
         navigate(`${base}/playlist/search`, {replace: false, state: {token: location.state.token, id: playlist_id, country: userInfo.country} })
@@ -171,7 +167,6 @@ function Home() {
             let playlists = userPlaylists.filter(playlist => {
                 return playlist.id != id
             })
-            console.log(playlists)
             setUserPlaylists(playlists)
         }
         else{
@@ -184,7 +179,6 @@ function Home() {
 
     const displayPlaylists = () => {
 
-        console.log("DISPLAY PLAYLIST")
         return (
             <div className="playlists-section">
                 {userPlaylists.length !== 0 && <div className="section-name">Playlists:</div>}
@@ -200,8 +194,6 @@ function Home() {
     }
     
     const displayOptions = () => {
-
-        console.log("DISPLAY Options")
 
         return (
             <div className="options">
@@ -220,6 +212,7 @@ function Home() {
         {expired ? <LoginExpired/> : userInfo ? 
             <div className="user-logged">
                 <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
+                <div>{window.screen.width}</div>
                 {handleUI()}
                 {displayOptions()}
                 {userPlaylists.length === 0 && <div> <div className="fetch">Retrieving Playlist Information.....</div><div className="load"></div></div>}
