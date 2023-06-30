@@ -38,16 +38,27 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto;
+    column-gap: 4px;
 }
 
-.related-artists {
-    cursor: pointer;
-    padding: 8px;
+.artist-track-item > img {
+    width: 100px;
+    height: 100px;
+    border: 2px black solid;
+    object-fit: cover;
+    margin: auto;
 }
 
-.search-item {
-    padding: 8px;
-    cursor: pointer;
+
+.artist-top-tracks > .search-item, .artist-albums > .album-search-item, 
+.related-artists > .search-item {
+    width: 100%;
+    padding: 2px;
+    cursor: auto;
+}
+
+.album-search-item > .album-item-name:hover {
+    white-space: normal;
 }
 
 
@@ -56,6 +67,10 @@
 
     #artist-section {
         margin: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
     }
     
     .artist-details {
@@ -107,32 +122,39 @@
     }
     
     .artist-top-tracks, .artist-albums, .related-artists {
-        padding: 1vh 1vw;
+        padding: 0px 0px 8px 8px;
+        width: 100%;
         display: flex;
-        flex-direction: row;
-        gap: 8px;
         overflow-x: scroll;
     }
-    
+
+    #artist-section .artist-top-tracks .search-item {
+        padding: 8px;
+        min-width: 90%;
+    }
+
     .related-artists {
         cursor: pointer;
         padding: 8px;
     }
 
     .artist-albums .album-search-item {
-        width: 275px;
+        min-width: 90%;
         border: 2px black solid;
         display: flex;
         flex-direction: column;
     }
 
     .related-artists {
-        padding: 1vh 0vw;
+        padding: 1vh 1vw;
+    }
+
+    .related-artists .search-item {
+        min-width: 90%;
     }
     
-    .search-item {
+    .search-list .search-item {
         padding: 8px;
-        cursor: pointer;
     }
     
 

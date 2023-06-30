@@ -221,6 +221,7 @@
 }
 
 .results > button {
+    display: none;
     margin: 0;
     background: hsl(144, 90%, 50%);
     /* border-radius: 50%; */
@@ -265,12 +266,10 @@
     grid-template-rows: auto;
     column-gap: 2px;
     row-gap: 8px;
-    cursor: pointer;
 }
 
 .search-item, .album-search-item {
-    max-width: 500px;
-    min-width: 250px;
+    width: 325px;
     border: 2px black solid;
     display: grid;
     grid-template-rows: repeat(auto, 1fr, auto);
@@ -283,7 +282,7 @@
 
 .search-item > .item-name, 
 .search-item > .track-item-name,
-.search-item > .album-item-name {
+.album-search-item > .album-item-name {
     font-weight: bold;
     padding: 0;
     width: 90%;
@@ -297,8 +296,12 @@
     white-space: normal;
 }
 
+.search-item > .track-item-name:hover {
+    white-space: normal;
+}
 
-.search-item > img {
+
+.album-search-item > img, .search-item > img {
     width: 200px;
     height: 200px;
     border: 2px black solid;
@@ -592,12 +595,17 @@
     }
     
     .search-list-artist {
+        padding: 16px;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         justify-items: center;
         column-gap: 0px;
         row-gap: 4px;
+    }
+
+    .search-list-artist .search-item {
+        padding: 8px;
     }
 
     .search-list-artist::before {
