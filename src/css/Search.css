@@ -653,7 +653,7 @@
         justify-content: center;
         text-align: center;
         white-space: wrap;
-        overflow: hidden;
+        overflow-y: hidden;
         text-overflow: ellipsis;
         margin: 0 auto;
     }
