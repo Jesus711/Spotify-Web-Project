@@ -520,14 +520,13 @@
     width: 8px;
   }
   
-
   ::-webkit-scrollbar {
     width: 8px;
   }
 
 }
 
-/* Tablet 481px - 768px */
+/* Tablet, Small Laptop 481px - 768px */
 @media (481px <= width <= 1024px) {
   .fetch {
     width: 70%;
@@ -707,5 +706,132 @@
     .playlist-tracks::-webkit-scrollbar {
         height: 24px;
     }
+
+}
+
+/* Laptops 1025px - 1600px */
+@media (1025px <= width <= 1600px) {
+
+  .playlist-tracks::-webkit-scrollbar-track {
+    background-color: #1f6a85;
+    border-radius: 16px;
+  }
+
+  .playlist-tracks::-webkit-scrollbar-thumb {
+    background-color: hsl(32, 90%, 50%);
+    border-radius: 16px;
+  }
+
+  .playlist-tracks::-webkit-scrollbar {
+      height: 24px;
+      width: 90%;
+  }
+
+
+  .fetch {
+    width: 70%;
+    height: 60%;
+    font-size: 3rem;
+  }
+
+
+/* Home.jsx Playlists CSS */
+.playlists-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+ }
+
+.section-name {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+
+.playlists {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 94%;
+  }
+
+
+.playlist {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .playlist-details {
+    width: 100%;
+  }
+
+.playlist-tracks {
+    width: 96%;
+    display: flex;
+    padding: 0;
+    gap: 12px;
+    overflow-x: scroll;
+  }
+
+.track {
+    margin: 1vh 0.5vw 0 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.playlist-data {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playlist-data > p, strong, h3{
+  margin: 0;
+  padding: 0;
+}
+
+.edit-delete-btns {
+  display: flex;
+  margin-bottom: 0.25vh;
+  gap: 4px;
+}
+
+.edit-btn{
+  padding: 8px;
+  background-color: hsl(144, 80%, 40%);
+  color: #000;
+  border: #FFF solid 2px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  width: auto;
+}
+
+.edit-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(144, 80%, 40%)
+}
+
+.delete-btn{
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: auto;
+}
+
+.delete-btn:hover{
+  cursor: pointer;
+  background-color: black;
+  color: hsl(0, 100%, 60%)
+}
 
 }

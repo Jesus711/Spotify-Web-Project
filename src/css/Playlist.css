@@ -367,7 +367,7 @@ input[type="file"] {
 
 }
 
-/* Tablet 481px - 768px */
+/* Tablet 481px - 1024px */
 @media (481px <= width <= 1024px) {
 
   .image-radio-options {
@@ -488,4 +488,132 @@ input[type="file"] {
     object-fit: contain;
   }
 
+}
+
+
+/* Laptops 1025px - 1600px */
+@media (1025px <= width <= 1600px) {
+
+
+    .playlist-form-container {
+      row-gap: 16px;
+    };
+
+    .image-radio-options {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .playlist-creation {
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-items: center;
+      gap: 8px;
+      border-radius: 4px;
+    }
+
+    .playlist-setting {
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto;
+    }
+
+
+    #name-input{
+      width: 60%;
+    }
+
+    #name-input::placeholder {
+      color: #ddd;
+      text-align: center;
+    }
+
+    #create-btn{
+      padding: 8px;
+      width: 30%;
+    }
+
+    .playlist-desc {
+      margin: 1vh 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+      gap: 0.5vh;
+      width: 80%;
+    }
+
+    .playlist-desc > label {
+      align-self: center;
+    }
+
+    .playlist-creation > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+
+
+    .option-label {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .playlist-img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-label {
+      margin: 4px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+
+    input[type="file"] {
+      cursor: pointer;
+    }
+
+
+    .image-option {
+      display: none;
+    }
+
+
+    .upload {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        cursor: auto;
+      }
+
+
+    .preview {
+      margin: 4px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .playlist-view {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+      
+    .upload-btn {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
 }

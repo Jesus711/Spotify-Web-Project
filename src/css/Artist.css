@@ -248,3 +248,95 @@
         white-space: normal;
     }
 }
+
+/* Laptops 1025px - 1600px */
+@media (1025px <= width <= 1600px) {
+    #artist-section {
+        margin: 8px;
+        margin-top: 16px;
+    }
+    
+    .artist-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.25vw;
+    }
+    
+    .artist-details > img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    
+    .artist-stats {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: start;
+    }
+    
+    .artist-stats ul li {
+        margin: 0;
+        padding: 0;
+        margin-left: 1vw;
+        text-align: left;
+        list-style-type: disc;
+        font-size: 1rem;
+    }
+    .artist-stats ul {
+        margin: 0;
+    }
+
+    #artist-section h2 {
+        margin: 12px 0 8px 0;
+        padding: 0;
+    }
+    
+    .artist-top-tracks, .artist-albums, .related-artists {
+        padding: 1vh 1vw;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        column-gap: 4px;
+    }
+
+    .artist-top-tracks .search-item {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        justify-content: unset;
+        align-items: center;
+    }
+
+    .artist-top-tracks .search-item audio {
+        width: 90%;
+        justify-self: center;
+    }
+    
+    .artist-top-tracks .search-item > img {
+        width: 125px;
+        height: 125px;
+        border: 2px black solid;
+        object-fit: cover;
+        margin: auto;
+    }
+    
+    
+    .artist-top-tracks > .search-item, .artist-albums > .album-search-item, 
+    .related-artists > .search-item {
+        width: 100%;
+        padding: 0;
+        cursor: auto;
+    }
+
+    .related-artists .search-item::after {
+        content: "Click to View Artist Info";
+    }
+    
+    .album-search-item > .album-item-name:hover {
+        white-space: normal;
+    }
+    
+}

@@ -167,3 +167,10 @@
         display: none;
     }
 }
+
+
+/* Laptops 1025px - 1600px */
+@media (1025px <= width <= 1600px) {
+
+    
+}

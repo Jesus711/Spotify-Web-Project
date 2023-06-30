@@ -131,3 +131,51 @@
         justify-self: center;
     }
 }
+
+/* Laptops 1025px - 1600px */
+@media (1025px <= width <= 1600px) {
+    .album-display {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    .album-details .item-name{
+        font-weight: bold;
+        margin-bottom: 4px;
+        font-size: 1.5rem;
+    }
+    
+    .album-details > img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 2px black solid;
+    }
+    
+    .album-tracks{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        padding: 1vh 1vw;
+        column-gap: 8px;
+        row-gap: 4px;
+    }
+
+    .album-tracks .search-item {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        justify-content: unset;
+        align-items: center;
+    }
+
+    .album-tracks .search-item audio {
+        width: 90%;
+        justify-self: center;
+    }
+    
+}
