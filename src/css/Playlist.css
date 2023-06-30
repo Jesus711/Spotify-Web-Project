@@ -368,7 +368,7 @@ input[type="file"] {
 }
 
 /* Tablet 481px - 768px */
-@media (481px <= width <= 768px) {
+@media (481px <= width <= 1024px) {
 
   .image-radio-options {
     display: flex;

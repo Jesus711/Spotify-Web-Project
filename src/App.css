@@ -162,7 +162,7 @@
 
   }
 
-  @media (481px <= width <= 768px) {
+  @media (481px <= width <= 1024px) {
     .load {
       border: 8px solid black;
       border-top: 8px solid  hsl(144, 70%, 60%);

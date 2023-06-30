@@ -528,7 +528,7 @@
 }
 
 /* Tablet 481px - 768px */
-@media (481px <= width <= 768px) {
+@media (481px <= width <= 1024px) {
   .fetch {
     width: 70%;
     height: 60%;

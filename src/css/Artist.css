@@ -159,7 +159,7 @@
 }
 
 /* Tablet 481px - 768px */
-@media (481px <= width <= 768px) {
+@media (481px <= width <= 1024px) {
     #artist-section {
         margin: 8px;
         margin-top: 16px;
