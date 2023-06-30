@@ -198,7 +198,7 @@
 }
 
 .edit-delete-btns {
-  display: flex;;
+  display: flex;
   gap: 4px;
 }
 
@@ -897,5 +897,17 @@
   background-color: black;
   color: hsl(0, 100%, 60%)
 }
+
+}
+
+@media (height <= 500px) {
+
+  .option-btn {
+      background-color: #000;
+      height: 50px;
+      padding: 2vh;
+      font-size: 1.25rem;
+      min-width: 200px;
+    }
 
 }
