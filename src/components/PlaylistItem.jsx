@@ -19,6 +19,7 @@ function PlaylistItem({ playlist, handleEditPlaylist, handleDeletePlaylist }) {
                         <button className="edit-btn" onClick={() => {handleEditPlaylist(playlist.id)}}>Edit Playlist</button>
                         <button className="delete-btn" onClick={() => {handleDeletePlaylist(playlist.id)}}>Delete Playlist</button>
                 </div>
+                <a id="playlist-link" href={playlist.link}>Start Playing</a>
             </div>
             {playlist.info.length === 0 ? 
                 <div className='empty'>

@@ -79,7 +79,10 @@ function Home() {
             let total = playlist.tracks.total;
             let publicPlay = playlist.public;
             let collab = playlist.collaborative;
-            let playlistObj = {"id" : id, "name" : name, "image": images, "description" : desc, "total" : total, "public" : publicPlay, "collaborative": collab, "info" : []}
+            let link = playlist.external_urls.spotify
+            let playlistObj = {"id" : id, "name" : name, "image": images, "description" : desc, 
+                                "total" : total, "public" : publicPlay, "collaborative": collab, 
+                                "link" : link, "info" : []}
             let tracks = await getPlaylistTracks(playlist.tracks.href)
             for(let track of tracks.items){
                 let tid = track.track.id
@@ -95,6 +98,7 @@ function Home() {
                 trackObj["images"] = track.track.album.images;
                 playlistObj["info"].push(trackObj);
             }
+            console.log(playlist)
             playlists.push(playlistObj)
         }
 
