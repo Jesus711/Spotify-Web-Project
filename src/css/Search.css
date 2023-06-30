@@ -652,9 +652,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        white-space: wrap;
-        overflow-y: hidden;
-        text-overflow: ellipsis;
+        white-space: normal;
         margin: 0 auto;
     }
 
