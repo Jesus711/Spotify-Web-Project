@@ -15,8 +15,6 @@ function Collab() {
     const base = import.meta.env.DEV ? '' : '/Spotify-Web-Project'
 
 
-    console.log(location.state)
-
     async function getCollabPlaylist(e) {
 
         e.preventDefault()
@@ -26,7 +24,6 @@ function Collab() {
             setInputToken("None")
             return null;
         }
-        console.log(collabPlaylist)
 
         let owner_token = collabPlaylist[1];
         setOwnerToken(owner_token)
@@ -53,7 +50,6 @@ function Collab() {
         }
 
         setInputToken(collabToken)
-        console.log(result)
         let id = `"${result.id}"`;
         let name = result.name;
         let images = result.images;
@@ -76,7 +72,6 @@ function Collab() {
                 trackObj["images"] = track.track.album.images;
                 playlist["info"].push(trackObj);
             }
-        console.log(playlist)
         setPlaylist(playlist)
     }
 
@@ -105,8 +100,8 @@ function Collab() {
 
     const handleCollabTokenSearch = () => {
 
-        console.log(inputToken)
-        if(playlist.id === undefined && inputToken === "None"){
+        if((playlist.id === undefined && inputToken === "None") || (playlist.id !== undefined && inputToken === "None")){
+            
             return (
                 <div>No Playlist Found!</div>
             )

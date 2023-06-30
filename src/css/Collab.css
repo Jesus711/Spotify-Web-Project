@@ -108,3 +108,62 @@
     }
 
 }
+
+/* Tablet 481px - 768px */
+@media (481px <= width <= 768px) {
+    
+    .collab-playlist {
+        margin: 1vh 0;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        align-items: center;
+        row-gap: 2vh;
+    }
+
+    .collab-playlist-form {
+        display: flex;
+        flex-direction: column;
+        justify-items: normal;
+        align-items: center;
+        gap: 1vh;
+    }
+
+    .collab-playlist-form #name-input {
+        width: 80%;
+    }
+
+    .collab-playlist-form #create-btn {
+        width: 40%;
+    }
+
+    .collab-playlist-form > div {
+        font-size: 2rem;
+    }
+
+    .collab-result{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .result-text {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+
+    .collab-playlist .collab-result .playlist {
+        width: 94%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+        justify-items: center;
+        align-items: stretch;
+        border: #000 solid 4px;
+    }
+
+    .collab-playlist .playlist .delete-btn {
+        display: none;
+    }
+}

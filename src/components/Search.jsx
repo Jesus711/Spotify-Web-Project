@@ -343,9 +343,9 @@ function Search() {
             }
 
             { !expired && prevSearch.length !== 0 && <div className="results">
-                <button>{"<"}</button>
+                {/* <button>{"<"}</button> */}
                 {displaySearchResults()}
-                <button>{">"}</button>
+                {/* <button>{">"}</button> */}
                 </div>
             }
         </div>

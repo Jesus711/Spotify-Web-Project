@@ -152,7 +152,6 @@ input[type="radio"]:checked {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid black; */
     position: relative;
   }
 
@@ -163,28 +162,9 @@ input[type="radio"]:checked {
     font-weight: 700;
   }
 
-  /* .image-option {
-    background: url("../src/assets/Empty_Playlist.jpg");
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    opacity: 100%;
-    cursor: pointer;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 
-  /* .image-option::before {
-    content: "Upload Image";
-
-  } */
 
 input[type="file"] {
-    /* display: none; */
     cursor: pointer;
   }
 
@@ -383,6 +363,129 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center; 
+  }
+
+}
+
+/* Tablet 481px - 768px */
+@media (481px <= width <= 768px) {
+
+  .image-radio-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .playlist-creation {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-items: center;
+    gap: 8px;
+    border-radius: 4px;
+  }
+
+  .playlist-setting {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: auto;
+  }
+
+
+  #name-input{
+    width: 80%;
+  }
+
+  #name-input::placeholder {
+    color: #ddd;
+    text-align: center;
+  }
+
+  #create-btn{
+    padding: 8px;
+    width: 50%;
+  }
+
+  .playlist-desc {
+    margin: 1vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: 0.5vh;
+    width: 80%;
+  }
+
+  .playlist-desc > label {
+    align-self: center;
+  }
+
+  .playlist-creation > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  .option-label {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .playlist-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-label {
+    margin: 4px;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+
+  input[type="file"] {
+    cursor: pointer;
+  }
+
+
+  .image-option {
+    display: none;
+  }
+
+
+  .upload {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      cursor: auto;
+    }
+
+
+  .preview {
+    margin: 4px;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .playlist-view {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+    
+  .upload-btn {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
   }
 
 }

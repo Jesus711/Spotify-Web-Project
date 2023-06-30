@@ -161,3 +161,15 @@
     }
 
   }
+
+  @media (481px <= width <= 768px) {
+    .load {
+      border: 8px solid black;
+      border-top: 8px solid  hsl(144, 70%, 60%);
+      border-radius: 50%;
+      width: 125px;
+      height: 125px;
+      margin: 2vh auto;
+      animation: rotate linear infinite 2s;
+    }
+  }
