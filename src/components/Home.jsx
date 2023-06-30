@@ -212,7 +212,6 @@ function Home() {
         {expired ? <LoginExpired/> : userInfo ? 
             <div className="user-logged">
                 <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
-                <div>{window.screen.width}</div>
                 {handleUI()}
                 {displayOptions()}
                 {userPlaylists.length === 0 && <div> <div className="fetch">Retrieving Playlist Information.....</div><div className="load"></div></div>}
