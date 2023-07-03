@@ -114,10 +114,18 @@ function Home() {
 
     const handleUI = () => {
 
+        let largest_img = {width: 0, height: 0}
+        if(userInfo.images) {
+            for(let image of userInfo.images) {
+                largest_img = image.height > largest_img.height ? image : largest_img;
+            }
+        }
+        let user_image = largest_img;
+
 
         return (
             <div className="user-info">
-                <img src={userInfo.images ? userInfo.images[0].url : avatar} alt="profile img"/>
+                <img src={largest_img.height !== 0 ? user_image.url : avatar} alt="profile img"/>
                 <div className="account-details">
                     <ul>
                         <li>Country: {userInfo.country}</li>
