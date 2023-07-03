@@ -38,7 +38,7 @@ function Home() {
             }).catch(err => {
                 return null;
             })
-            
+            console.log(result);
             setUserInfo(result);
         } catch(err) {
             setExpired(true)
