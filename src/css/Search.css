@@ -96,7 +96,8 @@
 }
 
 .desc {
-    max-width: 250px;
+    font-size: 1rem;
+    max-width: 300px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -153,8 +154,8 @@
 
 .playlist-img-desc > img {
     border-radius: 10%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border: 2px solid black;
 }

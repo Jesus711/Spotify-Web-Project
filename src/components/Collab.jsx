@@ -27,12 +27,13 @@ function Collab() {
 
         let owner_token = collabPlaylist[1];
         setOwnerToken(owner_token)
+        // console.log(location.state)
 
         let result = await fetch(`https://api.spotify.com/v1/playlists/${collabPlaylist[0]}`,//?${song}&position=0`, 
         {
             method: "GET",
             headers: {
-                'Authorization': `Bearer ${location.state.token}`,
+                'Authorization': `Bearer ${location.state.token}`, // ${location.state.guest ? owner_token : location.state.token}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => {

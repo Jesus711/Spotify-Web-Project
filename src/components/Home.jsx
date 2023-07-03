@@ -64,7 +64,17 @@ function Home() {
             return null;
         })
 
+        console.log("HERE", result)
+
         if(result === null){
+            setUserPlaylists(["NONE"])
+            return;
+        }
+
+        let no_playlist = result.items ? result.items.length : null;
+        if (no_playlist === 0){
+            console.log("HERE233")
+            setUserPlaylists(["NONE"])
             return;
         }
 
@@ -175,28 +185,33 @@ function Home() {
             let playlists = userPlaylists.filter(playlist => {
                 return playlist.id != id
             })
+            console.log(playlists)
+            if (playlists.length === 0) {
+                setUserPlaylists(["NONE"])
+                return;
+            }
             setUserPlaylists(playlists)
         }
         else{
             console.log("CANCELED")
         }
-
-
-
     }
 
     const displayPlaylists = () => {
 
         return (
             <div className="playlists-section">
-                {userPlaylists.length !== 0 && <div className="section-name">Playlists:</div>}
+                {userPlaylists.length !== 0 && userPlaylists[0] !== "NONE" && <div className="section-name">Playlists:</div>}
 
-                <div className="playlists">
-                    {userPlaylists && userPlaylists.map((playlist) => {
-                        return (
-                            <PlaylistItem key={playlist.id} playlist={playlist} handleEditPlaylist={handleEditPlaylist} handleDeletePlaylist={handleDeletePlaylist}/>
-                        )})}
+                {userPlaylists.length !== 0 && userPlaylists[0] === "NONE" ? <h2>No Playlists Found!</h2> : 
+                    <div className="playlists">
+                        {userPlaylists && userPlaylists.map((playlist) => {
+                            return (
+                                <PlaylistItem key={playlist.id} playlist={playlist} handleEditPlaylist={handleEditPlaylist} handleDeletePlaylist={handleDeletePlaylist}/>
+                            )})}
                     </div>
+                }
+
             </div>   
         )
     }
@@ -222,6 +237,7 @@ function Home() {
                 <div className="welcome-msg">Welcome {userInfo.display_name}!</div> 
                 {handleUI()}
                 {displayOptions()}
+                {console.log(userPlaylists.length)}
                 {userPlaylists.length === 0 && <div> <div className="fetch">Retrieving Playlist Information.....</div><div className="load"></div></div>}
                 {displayPlaylists()}
             </div> : 

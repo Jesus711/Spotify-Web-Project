@@ -111,7 +111,10 @@ function Login() {
             <div>Spotify Login</div>
             <a className="link login-btn" onClick={() => {window.sessionStorage.clear()}} href={url}>Login to Spotify</a>
             <p>Must First Login Into Your Spotify Account to Use Web Service</p> 
-            {/* <button className="login-btn">Login to Spotify</button> */}
+            {/* <button disabled onClick={() => {navigate(`${base}/collab`, {replace: false, state: {"guest" : 1} } )}} className="option-btn">
+                    <div>Collab As A Guest</div>
+                </button>
+                <p>Work in Progress</p> */}
         </div>
 
     )
