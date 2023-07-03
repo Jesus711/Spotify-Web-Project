@@ -7,6 +7,8 @@ Used ReactJS, Javascript, HTML, CSS, and the Spotify Web API to Create
 
 Live: https://jesus711.github.io/Spotify-Web-Project/
 
+Demo Video: https://youtu.be/qAaM1way9l0
+
 # Features:
 - Login in to Spotify Account
 - Displays User's Image, Country, Follower Count, and Whether User is a Free or Premium User
