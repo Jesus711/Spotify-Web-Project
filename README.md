@@ -5,7 +5,7 @@ Used ReactJS, Javascript, HTML, CSS, and the Spotify Web API to Create
 
 # Only Developers Are Able to Use The Spotify Service 
 
-Live Demo: https://jesus711.github.io/Spotify-Web-Project/
+Live: https://jesus711.github.io/Spotify-Web-Project/
 
 # Features:
 - Login in to Spotify Account
