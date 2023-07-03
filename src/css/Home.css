@@ -81,6 +81,7 @@
     background-image: linear-gradient(to right, hsl(144, 90%, 50%), hsl(144, 90%, 60%));
     background-color: none;
     box-shadow: 1px 1px 0px 4px hsl(144, 90%, 0%);
+    cursor: pointer;
   }
 
 .option-btn:hover {
