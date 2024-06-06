@@ -3,6 +3,8 @@ Recreating a Group Project, Spotify Collaborative Playlists, that used ReactJS, 
 
 Used ReactJS, Javascript, HTML, CSS, and the Spotify Web API to Create
 
+Previous Project: https://github.com/BuckingFroncos/spotify
+
 # Only Developers Are Able to Use The Spotify Service 
 
 Live: https://jesus711.github.io/Spotify-Web-Project/
