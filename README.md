@@ -6,10 +6,12 @@ For this project, I used ReactJS, Javascript, HTML, Vanilla CSS, and the Spotify
 Previous Project: https://github.com/BuckingFroncos/spotify
 
 # Only Developers Are Able to Use The Spotify Service 
+Due to the limitations, I created a demo video showcasing the web project,
+
+Demo Video: https://youtu.be/qAaM1way9l0
 
 Live: https://jesus711.github.io/Spotify-Web-Project/
 
-Demo Video: https://youtu.be/qAaM1way9l0
 
 # Features:
 - Login in to Spotify Account
