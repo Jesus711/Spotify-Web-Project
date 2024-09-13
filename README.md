@@ -1,7 +1,7 @@
 # Spotify-Web-Project
 Recreating a Group Project, Spotify Collaborative Playlists, that used ReactJS, Material UI, Python Flask, Spotify Web API and Heroku to deploy.
 
-Used ReactJS, Javascript, HTML, CSS, and the Spotify Web API to Create
+For this project, I used ReactJS, Javascript, HTML, Vanilla CSS, and the Spotify Web API
 
 Previous Project: https://github.com/BuckingFroncos/spotify
 
